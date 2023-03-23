@@ -39,18 +39,18 @@
                     <div class="content-side content-side-full content-side-user px-10 align-parent">
                         <!-- Visible only in mini mode -->
                         <div class="sidebar-mini-visible-b align-v animated fadeIn">
-                            <img class="img-avatar img-avatar32" src="assets/media/avatars/avatar15.jpg" alt="">
+                            <img class="img-avatar img-avatar32" src="/assets/media/avatars/avatar15.jpg" alt="">
                         </div>
                         <!-- END Visible only in mini mode -->
 
                         <!-- Visible only in normal mode -->
                         <div class="sidebar-mini-hidden-b text-center">
                             <a class="img-link" href="be_pages_generic_profile.html">
-                                <img class="img-avatar" src="assets/media/avatars/avatar15.jpg" alt="">
+                                <img class="img-avatar" src="/assets/media/avatars/avatar15.jpg" alt="">
                             </a>
                             <ul class="list-inline mt-10">
                                 <li class="list-inline-item">
-                                    <a class="link-effect text-dual-primary-dark font-size-sm font-w600 text-uppercase" href="be_pages_generic_profile.html">{{ Auth::user()->name }}</a>
+                                    <a class="link-effect text-dual-primary-dark font-size-sm font-w600 text-uppercase" href="be_pages_generic_profile.html">{{ Auth::user()->id }}</a>
                                 </li>
                             </ul>
                         </div>
@@ -72,7 +72,7 @@
                                 <a href="be_pages_dashboard.html"><i class="si si-book-open"></i><span class="sidebar-mini-hide">Kegiatan</span></a>
                             </li>
                             <li>
-                                <a href="be_pages_dashboard.html"><i class="si si-calendar"></i><span class="sidebar-mini-hide">Penjadwalan</span></a>
+                                <a href="{{route('penjadwalan.index')}}"><i class="si si-calendar"></i><span class="sidebar-mini-hide">Penjadwalan</span></a>
                             </li>
                             <li>
                                 <a href="be_pages_dashboard.html"><i class="si si-envelope-letter"></i><span class="sidebar-mini-hide">Exception</span></a>
@@ -84,9 +84,9 @@
                             </li>
                             <li class="nav-main-heading"><span class="sidebar-mini-hidden">Kelola Simpus</span></li>
                             <li>
-                                <a href="be_pages_dashboard.html"><i class="si si-map"></i><span class="sidebar-mini-hide">Master Desa</span></a>
+                                <a href="{{route('desa.index')}}"><i class="si si-map"></i><span class="sidebar-mini-hide">Master Desa</span></a>
                             </li>                            <li>
-                                <a href="be_pages_dashboard.html"><i class="fa fa-user-md"></i><span class="sidebar-mini-hide">Master Petugas</span></a>
+                                <a href="{{route('petugas.index')}}"><i class="fa fa-user-md"></i><span class="sidebar-mini-hide">Master Petugas</span></a>
                             </li>
                     </div>
                     <!-- END Side Navigation -->

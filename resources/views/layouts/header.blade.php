@@ -30,27 +30,27 @@
                                         </a>
                                     </div>
                                     <div class="col-2 mb-5">
-                                        <a class="text-elegance" data-toggle="theme" data-theme="assets/css/themes/elegance.min.css" href="javascript:void(0)">
+                                        <a class="text-elegance" data-toggle="theme" data-theme="/assets/css/themes/elegance.min.css" href="javascript:void(0)">
                                             <i class="fa fa-2x fa-circle"></i>
                                         </a>
                                     </div>
                                     <div class="col-2 mb-5">
-                                        <a class="text-pulse" data-toggle="theme" data-theme="assets/css/themes/pulse.min.css" href="javascript:void(0)">
+                                        <a class="text-pulse" data-toggle="theme" data-theme="/assets/css/themes/pulse.min.css" href="javascript:void(0)">
                                             <i class="fa fa-2x fa-circle"></i>
                                         </a>
                                     </div>
                                     <div class="col-2 mb-5">
-                                        <a class="text-flat" data-toggle="theme" data-theme="assets/css/themes/flat.min.css" href="javascript:void(0)">
+                                        <a class="text-flat" data-toggle="theme" data-theme="/assets/css/themes/flat.min.css" href="javascript:void(0)">
                                             <i class="fa fa-2x fa-circle"></i>
                                         </a>
                                     </div>
                                     <div class="col-2 mb-5">
-                                        <a class="text-corporate" data-toggle="theme" data-theme="assets/css/themes/corporate.min.css" href="javascript:void(0)">
+                                        <a class="text-corporate" data-toggle="theme" data-theme="/assets/css/themes/corporate.min.css" href="javascript:void(0)">
                                             <i class="fa fa-2x fa-circle"></i>
                                         </a>
                                     </div>
                                     <div class="col-2 mb-5">
-                                        <a class="text-earth" data-toggle="theme" data-theme="assets/css/themes/earth.min.css" href="javascript:void(0)">
+                                        <a class="text-earth" data-toggle="theme" data-theme="/assets/css/themes/earth.min.css" href="javascript:void(0)">
                                             <i class="fa fa-2x fa-circle"></i>
                                         </a>
                                     </div>
@@ -90,7 +90,7 @@
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-rounded btn-dual-secondary" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-user d-sm-none"></i>
-                                <span class="d-none d-sm-inline-block">J. Smith</span>
+                                <span class="d-none d-sm-inline-block">{{ Auth::user()->nama_lengkap }}</span>
                                 <i class="fa fa-angle-down ml-5"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right min-width-200" aria-labelledby="page-header-user-dropdown">

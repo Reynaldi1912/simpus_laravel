@@ -11,7 +11,7 @@ class UsersController extends Controller
         echo json_encode($user);
     }
  public function login(){
-  if(Auth::attempt(['name' => request('name'), 'password' => request('password')])){
+  if(Auth::attempt(['id' => request('id'), 'password' => request('password')])){
    $user = Auth::user();
    $success['token'] = $user->createToken('appToken')->accessToken;
    return response()->json([
@@ -28,7 +28,7 @@ class UsersController extends Controller
  }
  public function register(Request $request){
     $validator = Validator::make($request->all(), [
-     'name' => ['required', 'string', 'max:255'],
+     'id' => ['required', 'string', 'max:255'],
      'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
      'password' => ['required', 'string', 'min:8'],
     ]);

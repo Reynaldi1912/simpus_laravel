@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -43,17 +44,22 @@ class LoginController extends Controller
         $input = $request->all();
   
         $this->validate($request, [
-            'username' => 'required',
+            'id' => 'required',
             'password' => 'required',
         ]);
   
-        $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
-        if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password'])))
+        $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'id';
+        if(auth()->attempt(array($fieldType => $input['id'], 'password' => $input['password'])))
         {
-            return redirect()->route('home');
+            if ( Auth::user()->role === 'admin'){
+                return redirect()->route('home')->with('success','Login Berhasil , Selamat Datang '.Auth::user()->nama_lengkap);
+            }else{
+                $request->session()->flush();
+                return redirect()->route('login')->with('error','Halaman ini khusus untuk admin');
+            }
         }else{
             return redirect()->route('login')
-                ->with('error','Email-Address And Password Are Wrong.');
+                ->with('error','Email Atau Password Salah');
         }
           
     }

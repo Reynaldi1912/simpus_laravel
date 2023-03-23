@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-        <title>SIMPUS</title>
+        <title>SIMPUS - Puskesmas Kedungjajang</title>
 
         <meta name="description" content="Codebase - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
         <meta name="author" content="pixelcave">
@@ -36,11 +36,11 @@
         <!-- END Stylesheets -->
     </head>
     <body>
+        @include('flashmessage')
         <div id="page-container" class="main-content-boxed">
 
             <!-- Main Container -->
             <main id="main-container">
-
                 <!-- Page Content -->
                 <div class="bg-image" style="background-image: url('assets/media/photos/photo34@2x.jpg');">
                     <div class="row mx-0 bg-black-op">
@@ -75,7 +75,7 @@
                                     <div class="form-group row">
                                         <div class="col-12">
                                             <div class="form-material floating">
-                                                <input type="text" class="form-control" id="login-username" name="username">
+                                                <input type="text" class="form-control" id="login-username" name="id">
                                                 <label for="login-username">Email / Username</label>
                                             </div>
                                         </div>

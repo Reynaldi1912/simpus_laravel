@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDataDirisTable extends Migration
+class DesaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateDataDirisTable extends Migration
      */
     public function up()
     {
-        Schema::create('data_diris', function (Blueprint $table) {
+        Schema::create('desa', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('job');
+            $table->string('nama_desa');
+            $table->string('latitude');
+            $table->string('longitude');
+            $table->string('radius');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateDataDirisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('data_diris');
+        //
     }
 }

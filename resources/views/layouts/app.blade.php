@@ -4,12 +4,19 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-        <title>Codebase - Bootstrap 4 Admin Template &amp; UI Framework</title>
+        <title>SIMPUS - Puskesmas Kedungjajang</title>
 
         <meta name="description" content="Codebase - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
         <meta name="author" content="pixelcave">
         <meta name="robots" content="noindex, nofollow">
-
+        
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+        crossorigin=""></script>
+        
         <!-- Open Graph Meta -->
         <meta property="og:title" content="Codebase - Bootstrap 4 Admin Template &amp; UI Framework">
         <meta property="og:site_name" content="Codebase">
@@ -20,20 +27,31 @@
 
         <!-- Icons -->
         <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
-        <link rel="shortcut icon" href="assets/media/favicons/favicon.png">
-        <link rel="icon" type="image/png" sizes="192x192" href="assets/media/favicons/favicon-192x192.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="assets/media/favicons/apple-touch-icon-180x180.png">
+        <link rel="shortcut icon" href="/assets/media/favicons/favicon.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/assets/media/favicons/favicon-192x192.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/media/favicons/apple-touch-icon-180x180.png">
         <!-- END Icons -->
 
         <!-- Stylesheets -->
-
         <!-- Page JS Plugins CSS -->
-        <link rel="stylesheet" href="assets/js/plugins/slick/slick.css">
-        <link rel="stylesheet" href="assets/js/plugins/slick/slick-theme.css">
+        <link rel="stylesheet" href="/assets/js/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+        <link rel="stylesheet" href="/assets/js/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+        <link rel="stylesheet" href="/assets/js/plugins/select2/css/select2.min.css">
+        <link rel="stylesheet" href="/assets/js/plugins/jquery-tags-input/jquery.tagsinput.min.css">
+        <link rel="stylesheet" href="/assets/js/plugins/jquery-auto-complete/jquery.auto-complete.min.css">
+        <link rel="stylesheet" href="/assets/js/plugins/ion-rangeslider/css/ion.rangeSlider.css">
+        <link rel="stylesheet" href="/assets/js/plugins/dropzonejs/dist/dropzone.css">
+        <link rel="stylesheet" href="/assets/js/plugins/flatpickr/flatpickr.min.css">
+        <!-- Page JS Plugins CSS -->
+        <link rel="stylesheet" href="/assets/js/plugins/slick/slick.css">
+        <link rel="stylesheet" href="/assets/js/plugins/slick/slick-theme.css">
+        <link rel="stylesheet" href="/assets/js/plugins/datatables/dataTables.bootstrap4.css">
+
+        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
 
         <!-- Fonts and Codebase framework -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,600,700&display=swap">
-        <link rel="stylesheet" id="css-main" href="assets/css/codebase.min.css">
+        <link rel="stylesheet" id="css-main" href="/assets/css/codebase.min.css">
 
         <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
         <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/flat.min.css"> -->
@@ -85,6 +103,7 @@
             'main-content-boxed'                        Full width Main Content with a specific maximum width (screen width > 1200px)
             'main-content-narrow'                       Full width Main Content with a percentage width (screen width > 1200px)
         -->
+        @include('flashmessage')
         <div id="page-container" class="sidebar-o enable-page-overlay side-scroll page-header-modern main-content-boxed">
             <!-- Side Overlay-->
             <aside id="side-overlay">
@@ -101,9 +120,9 @@
                         <!-- User Info -->
                         <div class="content-header-item">
                             <a class="img-link mr-5" href="be_pages_generic_profile.html">
-                                <img class="img-avatar img-avatar32" src="assets/media/avatars/avatar15.jpg" alt="">
+                                <img class="img-avatar img-avatar32" src="/assets/media/avatars/avatar15.jpg" alt="">
                             </a>
-                            <a class="align-middle link-effect text-primary-dark font-w600" href="be_pages_generic_profile.html">{{ Auth::user()->fullname }}</a>
+                            <a class="align-middle link-effect text-primary-dark font-w600" href="be_pages_generic_profile.html">{{ Auth::user()->id }}</a>
                         </div>
                         <!-- END User Info -->
                     </div>
@@ -165,28 +184,28 @@
                             <ul class="nav-users push">
                                 <li>
                                     <a href="be_pages_generic_profile.html">
-                                        <img class="img-avatar" src="assets/media/avatars/avatar2.jpg" alt="">
+                                        <img class="img-avatar" src="/assets/media/avatars/avatar2.jpg" alt="">
                                         <i class="fa fa-circle text-success"></i> Judy Ford
                                         <div class="font-w400 font-size-xs text-muted">Photographer</div>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="be_pages_generic_profile.html">
-                                        <img class="img-avatar" src="assets/media/avatars/avatar11.jpg" alt="">
+                                        <img class="img-avatar" src="/assets/media/avatars/avatar11.jpg" alt="">
                                         <i class="fa fa-circle text-success"></i> Jose Wagner
                                         <div class="font-w400 font-size-xs text-muted">Web Designer</div>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="be_pages_generic_profile.html">
-                                        <img class="img-avatar" src="assets/media/avatars/avatar1.jpg" alt="">
+                                        <img class="img-avatar" src="/assets/media/avatars/avatar1.jpg" alt="">
                                         <i class="fa fa-circle text-warning"></i> Megan Fuller
                                         <div class="font-w400 font-size-xs text-muted">UI Designer</div>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="be_pages_generic_profile.html">
-                                        <img class="img-avatar" src="assets/media/avatars/avatar13.jpg" alt="">
+                                        <img class="img-avatar" src="/assets/media/avatars/avatar13.jpg" alt="">
                                         <i class="fa fa-circle text-danger"></i> Albert Ray
                                         <div class="font-w400 font-size-xs text-muted">Copywriter</div>
                                     </a>
@@ -395,6 +414,8 @@
                 Adding .sidebar-mini-visible to an element will show it only when the sidebar is in mini mode
                     - use .sidebar-mini-visible-b if you would like to be a block when visible (display: block)
             -->
+            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
            @include('layouts.sidebar')
             <!-- END Sidebar -->
 
@@ -404,334 +425,7 @@
 
             <!-- Main Container -->
             <main id="main-container">
-
-                <!-- Page Content -->
-                <div class="content">
-                    <div class="row invisible" data-toggle="appear">
-                        <!-- Row #1 -->
-                        <div class="col-6 col-xl-3">
-                            <a class="block block-link-shadow text-right" href="javascript:void(0)">
-                                <div class="block-content block-content-full clearfix">
-                                    <div class="float-left mt-10 d-none d-sm-block">
-                                        <i class="si si-bag fa-3x text-body-bg-dark"></i>
-                                    </div>
-                                    <div class="font-size-h3 font-w600" data-toggle="countTo" data-speed="1000" data-to="1500">0</div>
-                                    <div class="font-size-sm font-w600 text-uppercase text-muted">Sales</div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-6 col-xl-3">
-                            <a class="block block-link-shadow text-right" href="javascript:void(0)">
-                                <div class="block-content block-content-full clearfix">
-                                    <div class="float-left mt-10 d-none d-sm-block">
-                                        <i class="si si-wallet fa-3x text-body-bg-dark"></i>
-                                    </div>
-                                    <div class="font-size-h3 font-w600">$<span data-toggle="countTo" data-speed="1000" data-to="780">0</span></div>
-                                    <div class="font-size-sm font-w600 text-uppercase text-muted">Earnings</div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-6 col-xl-3">
-                            <a class="block block-link-shadow text-right" href="javascript:void(0)">
-                                <div class="block-content block-content-full clearfix">
-                                    <div class="float-left mt-10 d-none d-sm-block">
-                                        <i class="si si-envelope-open fa-3x text-body-bg-dark"></i>
-                                    </div>
-                                    <div class="font-size-h3 font-w600" data-toggle="countTo" data-speed="1000" data-to="15">0</div>
-                                    <div class="font-size-sm font-w600 text-uppercase text-muted">Messages</div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-6 col-xl-3">
-                            <a class="block block-link-shadow text-right" href="javascript:void(0)">
-                                <div class="block-content block-content-full clearfix">
-                                    <div class="float-left mt-10 d-none d-sm-block">
-                                        <i class="si si-users fa-3x text-body-bg-dark"></i>
-                                    </div>
-                                    <div class="font-size-h3 font-w600" data-toggle="countTo" data-speed="1000" data-to="4252">0</div>
-                                    <div class="font-size-sm font-w600 text-uppercase text-muted">Online</div>
-                                </div>
-                            </a>
-                        </div>
-                        <!-- END Row #1 -->
-                    </div>
-                    <div class="row invisible" data-toggle="appear">
-                        <!-- Row #2 -->
-                        <div class="col-md-6">
-                            <div class="block">
-                                <div class="block-header">
-                                    <h3 class="block-title">
-                                        Sales <small>This week</small>
-                                    </h3>
-                                    <div class="block-options">
-                                        <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
-                                            <i class="si si-refresh"></i>
-                                        </button>
-                                        <button type="button" class="btn-block-option">
-                                            <i class="si si-wrench"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="block-content block-content-full">
-                                    <div class="pull-all">
-                                        <!-- Lines Chart Container functionality is initialized in js/pages/be_pages_dashboard.min.js which was auto compiled from _es6/pages/be_pages_dashboard.js -->
-                                        <!-- For more info and examples you can check out http://www.chartjs.org/docs/ -->
-                                        <canvas class="js-chartjs-dashboard-lines"></canvas>
-                                    </div>
-                                </div>
-                                <div class="block-content">
-                                    <div class="row items-push">
-                                        <div class="col-6 col-sm-4 text-center text-sm-left">
-                                            <div class="font-size-sm font-w600 text-uppercase text-muted">This Month</div>
-                                            <div class="font-size-h4 font-w600">720</div>
-                                            <div class="font-w600 text-success">
-                                                <i class="fa fa-caret-up"></i> +16%
-                                            </div>
-                                        </div>
-                                        <div class="col-6 col-sm-4 text-center text-sm-left">
-                                            <div class="font-size-sm font-w600 text-uppercase text-muted">This Week</div>
-                                            <div class="font-size-h4 font-w600">160</div>
-                                            <div class="font-w600 text-danger">
-                                                <i class="fa fa-caret-down"></i> -3%
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-sm-4 text-center text-sm-left">
-                                            <div class="font-size-sm font-w600 text-uppercase text-muted">Average</div>
-                                            <div class="font-size-h4 font-w600">24.3</div>
-                                            <div class="font-w600 text-success">
-                                                <i class="fa fa-caret-up"></i> +9%
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="block">
-                                <div class="block-header">
-                                    <h3 class="block-title">
-                                        Earnings <small>This week</small>
-                                    </h3>
-                                    <div class="block-options">
-                                        <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
-                                            <i class="si si-refresh"></i>
-                                        </button>
-                                        <button type="button" class="btn-block-option">
-                                            <i class="si si-wrench"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="block-content block-content-full">
-                                    <div class="pull-all">
-                                        <!-- Lines Chart Container functionality is initialized in js/pages/be_pages_dashboard.min.js which was auto compiled from _es6/pages/be_pages_dashboard.js -->
-                                        <!-- For more info and examples you can check out http://www.chartjs.org/docs/ -->
-                                        <canvas class="js-chartjs-dashboard-lines2"></canvas>
-                                    </div>
-                                </div>
-                                <div class="block-content bg-white">
-                                    <div class="row items-push">
-                                        <div class="col-6 col-sm-4 text-center text-sm-left">
-                                            <div class="font-size-sm font-w600 text-uppercase text-muted">This Month</div>
-                                            <div class="font-size-h4 font-w600">$ 6,540</div>
-                                            <div class="font-w600 text-success">
-                                                <i class="fa fa-caret-up"></i> +4%
-                                            </div>
-                                        </div>
-                                        <div class="col-6 col-sm-4 text-center text-sm-left">
-                                            <div class="font-size-sm font-w600 text-uppercase text-muted">This Week</div>
-                                            <div class="font-size-h4 font-w600">$ 1,525</div>
-                                            <div class="font-w600 text-danger">
-                                                <i class="fa fa-caret-down"></i> -7%
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-sm-4 text-center text-sm-left">
-                                            <div class="font-size-sm font-w600 text-uppercase text-muted">Balance</div>
-                                            <div class="font-size-h4 font-w600">$ 9,352</div>
-                                            <div class="font-w600 text-success">
-                                                <i class="fa fa-caret-up"></i> +35%
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END Row #2 -->
-                    </div>
-                    <div class="row invisible" data-toggle="appear">
-                        <!-- Row #3 -->
-                        <div class="col-md-4">
-                            <div class="block">
-                                <div class="block-content block-content-full">
-                                    <div class="py-20 text-center">
-                                        <div class="mb-20">
-                                            <i class="fa fa-envelope-open fa-4x text-primary"></i>
-                                        </div>
-                                        <div class="font-size-h4 font-w600">9.25k Subscribers</div>
-                                        <div class="text-muted">Your main list is growing!</div>
-                                        <div class="pt-20">
-                                            <a class="btn btn-rounded btn-alt-primary" href="javascript:void(0)">
-                                                <i class="fa fa-cog mr-5"></i> Manage list
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="block">
-                                <div class="block-content block-content-full">
-                                    <div class="py-20 text-center">
-                                        <div class="mb-20">
-                                            <i class="fa fa-twitter fa-4x text-info"></i>
-                                        </div>
-                                        <div class="font-size-h4 font-w600">+36 followers</div>
-                                        <div class="text-muted">You are doing great!</div>
-                                        <div class="pt-20">
-                                            <a class="btn btn-rounded btn-alt-info" href="javascript:void(0)">
-                                                <i class="fa fa-users mr-5"></i> Check them out
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="block">
-                                <div class="block-content block-content-full">
-                                    <div class="py-20 text-center">
-                                        <div class="mb-20">
-                                            <i class="fa fa-check fa-4x text-success"></i>
-                                        </div>
-                                        <div class="font-size-h4 font-w600">Business Plan</div>
-                                        <div class="text-muted">This is your current active plan</div>
-                                        <div class="pt-20">
-                                            <a class="btn btn-rounded btn-alt-success" href="javascript:void(0)">
-                                                <i class="fa fa-arrow-up mr-5"></i> Upgrade to VIP
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END Row #3 -->
-                    </div>
-                    <div class="row invisible" data-toggle="appear">
-                        <!-- Row #4 -->
-                        <div class="col-md-6">
-                            <a class="block block-link-shadow overflow-hidden" href="javascript:void(0)">
-                                <div class="block-content block-content-full">
-                                    <i class="si si-briefcase fa-2x text-body-bg-dark"></i>
-                                    <div class="row py-20">
-                                        <div class="col-6 text-right border-r">
-                                            <div class="invisible" data-toggle="appear" data-class="animated fadeInLeft">
-                                                <div class="font-size-h3 font-w600">16</div>
-                                                <div class="font-size-sm font-w600 text-uppercase text-muted">Projects</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="invisible" data-toggle="appear" data-class="animated fadeInRight">
-                                                <div class="font-size-h3 font-w600">2</div>
-                                                <div class="font-size-sm font-w600 text-uppercase text-muted">Active</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-6">
-                            <a class="block block-link-shadow overflow-hidden" href="javascript:void(0)">
-                                <div class="block-content block-content-full">
-                                    <div class="text-right">
-                                        <i class="si si-users fa-2x text-body-bg-dark"></i>
-                                    </div>
-                                    <div class="row py-20">
-                                        <div class="col-6 text-right border-r">
-                                            <div class="invisible" data-toggle="appear" data-class="animated fadeInLeft">
-                                                <div class="font-size-h3 font-w600 text-info">63250</div>
-                                                <div class="font-size-sm font-w600 text-uppercase text-muted">Accounts</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="invisible" data-toggle="appear" data-class="animated fadeInRight">
-                                                <div class="font-size-h3 font-w600 text-success">97%</div>
-                                                <div class="font-size-sm font-w600 text-uppercase text-muted">Active</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <!-- END Row #4 -->
-                    </div>
-                    <div class="row invisible" data-toggle="appear">
-                        <!-- Row #5 -->
-                        <div class="col-6 col-md-4 col-xl-2">
-                            <a class="block block-link-shadow text-center" href="be_pages_generic_inbox.html">
-                                <div class="block-content ribbon ribbon-bookmark ribbon-success ribbon-left">
-                                    <div class="ribbon-box">15</div>
-                                    <p class="mt-5">
-                                        <i class="si si-envelope-letter fa-3x"></i>
-                                    </p>
-                                    <p class="font-w600">Inbox</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-2">
-                            <a class="block block-link-shadow text-center" href="be_pages_generic_profile.html">
-                                <div class="block-content">
-                                    <p class="mt-5">
-                                        <i class="si si-user fa-3x"></i>
-                                    </p>
-                                    <p class="font-w600">Profile</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-2">
-                            <a class="block block-link-shadow text-center" href="be_pages_forum_categories.html">
-                                <div class="block-content ribbon ribbon-bookmark ribbon-primary ribbon-left">
-                                    <div class="ribbon-box">3</div>
-                                    <p class="mt-5">
-                                        <i class="si si-bubbles fa-3x"></i>
-                                    </p>
-                                    <p class="font-w600">Forum</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-2">
-                            <a class="block block-link-shadow text-center" href="be_pages_generic_search.html">
-                                <div class="block-content">
-                                    <p class="mt-5">
-                                        <i class="si si-magnifier fa-3x"></i>
-                                    </p>
-                                    <p class="font-w600">Search</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-2">
-                            <a class="block block-link-shadow text-center" href="be_comp_charts.html">
-                                <div class="block-content">
-                                    <p class="mt-5">
-                                        <i class="si si-bar-chart fa-3x"></i>
-                                    </p>
-                                    <p class="font-w600">Live Stats</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-2">
-                            <a class="block block-link-shadow text-center" href="javascript:void(0)">
-                                <div class="block-content">
-                                    <p class="mt-5">
-                                        <i class="si si-settings fa-3x"></i>
-                                    </p>
-                                    <p class="font-w600">Settings</p>
-                                </div>
-                            </a>
-                        </div>
-                        <!-- END Row #5 -->
-                    </div>
-                </div>
-                <!-- END Page Content -->
-
+                @yield('content')
             </main>
             <!-- END Main Container -->
 
@@ -770,7 +464,7 @@
             assets/js/core/jquery.countTo.min.js
             assets/js/core/js.cookie.min.js
         -->
-        <script src="assets/js/codebase.core.min.js"></script>
+        <script src="/assets/js/codebase.core.min.js"></script>
 
         <!--
             Codebase JS
@@ -778,13 +472,80 @@
             Custom functionality including Blocks/Layout API as well as other vital and optional helpers
             webpack is putting everything together at assets/_es6/main/app.js
         -->
-        <script src="assets/js/codebase.app.min.js"></script>
+        <script src="/assets/js/codebase.app.min.js"></script>
 
         <!-- Page JS Plugins -->
-        <script src="assets/js/plugins/chartjs/Chart.bundle.min.js"></script>
-        <script src="assets/js/plugins/slick/slick.min.js"></script>
+        <script src="/assets/js/plugins/chartjs/Chart.bundle.min.js"></script>
+        <script src="/assets/js/plugins/slick/slick.min.js"></script>
 
         <!-- Page JS Code -->
-        <script src="assets/js/pages/be_pages_dashboard.min.js"></script>
+        <script src="/assets/js/pages/be_pages_dashboard.min.js"></script>
+
+        <script src="/assets/js/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="/assets/js/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+        <script src="/assets/js/pages/be_tables_datatables.min.js"></script>
+
+        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.js'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+            integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <script src="/assets/js/plugins/pwstrength-bootstrap/pwstrength-bootstrap.min.js"></script>
+        <script src="/assets/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+        <script src="/assets/js/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+        <script src="/assets/js/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+        <script src="/assets/js/plugins/select2/js/select2.full.min.js"></script>
+        <script src="/assets/js/plugins/jquery-tags-input/jquery.tagsinput.min.js"></script>
+        <script src="/assets/js/plugins/jquery-auto-complete/jquery.auto-complete.min.js"></script>
+        <script src="/assets/js/plugins/masked-inputs/jquery.maskedinput.min.js"></script>
+        <script src="/assets/js/plugins/ion-rangeslider/js/ion.rangeSlider.min.js"></script>
+        <script src="/assets/js/plugins/dropzonejs/dropzone.min.js"></script>
+        <script src="/assets/js/plugins/flatpickr/flatpickr.min.js"></script>
+        <script src="/assets/js/pages/be_forms_plugins.min.js"></script>
+        <script src="/assets/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+        <script src="/assets/js/plugins/moment/moment.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+        <script type="text/javascript">
+ 
+            $('.show_confirm_delete').click(function(event) {
+                var form =  $(this).closest("form");
+                var name = $(this).data("name");
+                event.preventDefault();
+                swal({
+                    title: `Apakah anda yakin ingin menghapus data ini ?`,
+                    text: "Data yang sudah dihapus tidak bisa dikembalikan",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                    form.submit();
+                    }
+                });
+            });
+
+            $('.show_confirm_simpan').click(function(event) {
+                var form =  $(this).closest("form");
+                var name = $(this).data("name");
+                event.preventDefault();
+                swal({
+                    title: `Apakah anda yakin ingin menyimpan data ini ?`,
+                    text: "",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                    form.submit();
+                    }
+                });
+            });
+
+        </script>
+        <!-- Page JS Helpers (Flatpickr + BS Datepicker + BS Colorpicker + BS Maxlength + Select2 + Masked Input + Range Sliders + Tags Inputs plugins) -->
+        <script>jQuery(function(){ Codebase.helpers(['flatpickr', 'datepicker', 'colorpicker', 'maxlength', 'select2', 'masked-inputs', 'rangeslider', 'tags-inputs']); });</script>
     </body>
 </html>

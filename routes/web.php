@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\PetugasController;
+use App\Http\Controllers\DesaController;
+use App\Http\Controllers\PenjadwalanController;
+use App\Http\Controllers\JsonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +18,15 @@ use App\Http\Controllers\UsersController;
 |
 */
 
-Route::get('/test', [UsersController::class, 'index']);
-
-
 
 Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('petugas', PetugasController::class);
+Route::resource('desa', DesaController::class);
+Route::resource('penjadwalan', PenjadwalanController::class);
+
+Route::get('getUserByIdDesa/{id}', [JsonController::class, 'getUserByIdDesa'])->name('getUserByIdDesa');
+Route::get('getJadwalByDesa', [JsonController::class, 'getJadwalByDesa'])->name('getJadwalByDesa');
+

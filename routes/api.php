@@ -24,4 +24,4 @@ Route::group(['prefix' => 'v1'], function(){
     Route::post('login', [UsersController::class , 'login']);
     Route::post('register', [UsersController::class , 'register']);
     Route::get('logout', [UsersController::class , 'logout'])->middleware('auth:api');
-   });
+});

@@ -75,7 +75,7 @@
                                 <a href="{{route('penjadwalan.index')}}"><i class="si si-calendar"></i><span class="sidebar-mini-hide">Penjadwalan</span></a>
                             </li>
                             <li>
-                                <a href="be_pages_dashboard.html"><i class="si si-envelope-letter"></i><span class="sidebar-mini-hide">Exception</span></a>
+                                <a href="{{route('exception.index')}}"><i class="si si-envelope-letter"></i><span class="sidebar-mini-hide">Exception</span></a>
                             </li>
                             
                             <li class="nav-main-heading"><span class="sidebar-mini-hidden">Data Master</span></li>

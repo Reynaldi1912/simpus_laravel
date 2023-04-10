@@ -48,7 +48,7 @@
         <link rel="stylesheet" href="/assets/js/plugins/datatables/dataTables.bootstrap4.css">
 
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
-
+        
         <!-- Fonts and Codebase framework -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,600,700&display=swap">
         <link rel="stylesheet" id="css-main" href="/assets/css/codebase.min.css">
@@ -501,7 +501,9 @@
         <script src="/assets/js/plugins/ion-rangeslider/js/ion.rangeSlider.min.js"></script>
         <script src="/assets/js/plugins/dropzonejs/dropzone.min.js"></script>
         <script src="/assets/js/plugins/flatpickr/flatpickr.min.js"></script>
+
         <script src="/assets/js/pages/be_forms_plugins.min.js"></script>
+        
         <script src="/assets/js/plugins/jquery-ui/jquery-ui.min.js"></script>
         <script src="/assets/js/plugins/moment/moment.min.js"></script>
 

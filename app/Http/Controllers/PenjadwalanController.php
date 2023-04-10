@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Desa;
 use App\Models\Jadwal;
+use App\Imports\PenjadwalanImport;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class PenjadwalanController extends Controller
 {
@@ -35,6 +38,11 @@ class PenjadwalanController extends Controller
     public function create()
     {
         //
+    }
+    public function uploadJadwal(Request $request)
+    {
+        Excel::import(new PenjadwalanImport, $request->excel);
+        return redirect()->route('penjadwalan.index')->with('success', 'Berhasil Import Jadwal');
     }
     
 
@@ -103,7 +111,31 @@ class PenjadwalanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'txtModalUpaya'     => 'required',
+            'txtModalKegiatan'     => 'required',
+            'txtModalTanggal'   => 'required',
+            'txtModalRincian'   => 'required',
+            'slctPelaksana1' => 'required',
+            'slctPelaksana2' => 'required'
+        ]);
+
+        $jadwal = Jadwal::all()->where('id',$id)->first();
+
+        if($jadwal->status != 1){
+            $jadwal->update([
+                'upaya_kesehatan'     => $request->txtModalUpaya,
+                'kegiatan'     => $request->txtModalKegiatan,
+                'tanggal_mulai'   => $request->txtModalTanggal,
+                'rincian_pelaksanaan'   => $request->txtModalRincian,
+                'nama_pelaksana1'   => $request->slctPelaksana1,
+                'nama_pelaksana2'   => $request->slctPelaksana2,
+            ]);
+            return redirect()->route('penjadwalan.index')->with(['success' => 'Data Berhasil Di Edit!']);
+        }else{
+            return redirect()->route('penjadwalan.index')->with(['warning' => 'Data Tidak Bisa Diubah!']);
+        }
+        
     }
 
     /**
@@ -114,6 +146,10 @@ class PenjadwalanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //delete
+        Jadwal::where('id', $id)->delete();
+
+        //redirect to index
+        return redirect()->route('penjadwalan.index')->with(['success' => 'Jadwal Berhasil Dihapus!']);
     }
 }

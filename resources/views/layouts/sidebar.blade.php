@@ -66,11 +66,11 @@
                                 <a href="{{route('home')}}"><i class="fa fa-dashboard"></i><span class="sidebar-mini-hide">Dashboard</span></a>
                             </li>
                             <li>
-                                <a href="be_pages_dashboard.html"><i class="fa fa-stethoscope"></i><span class="sidebar-mini-hide">Kunjungan</span></a>
+                                <a href="{{route('kunjungan.index')}}"><i class="fa fa-stethoscope"></i><span class="sidebar-mini-hide">Kunjungan</span></a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="be_pages_dashboard.html"><i class="si si-book-open"></i><span class="sidebar-mini-hide">Kegiatan</span></a>
-                            </li>
+                            </li> -->
                             <li>
                                 <a href="{{route('penjadwalan.index')}}"><i class="si si-calendar"></i><span class="sidebar-mini-hide">Penjadwalan</span></a>
                             </li>
@@ -80,7 +80,7 @@
                             
                             <li class="nav-main-heading"><span class="sidebar-mini-hidden">Data Master</span></li>
                             <li>
-                                <a href="be_pages_dashboard.html"><i class="si si-users"></i><span class="sidebar-mini-hide">Master Pasien</span></a>
+                                <a href="{{route('pasien.index')}}"><i class="si si-users"></i><span class="sidebar-mini-hide">Master Pasien</span></a>
                             </li>
                             <li class="nav-main-heading"><span class="sidebar-mini-hidden">Kelola Simpus</span></li>
                             <li>

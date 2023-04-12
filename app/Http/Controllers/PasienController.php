@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Pasien;
 use DB;
-use App\Models\Exception;
-use App\Models\Jadwal;
-
-
-class ExceptionController extends Controller
+class PasienController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,9 +18,8 @@ class ExceptionController extends Controller
     }
     public function index()
     {
-        $data = DB::table('vw_detail_exception')->where('status_appr','0')->where('status_kunjungan','0')->get();
-        $history = DB::table('history_exception')->get();
-        return view('exception.index' , ['data'=>$data , 'history'=>$history]);
+        $pasien = Pasien::all();
+        return view('pasien.index',['pasien'=>$pasien]);
     }
 
     /**
@@ -33,6 +29,7 @@ class ExceptionController extends Controller
      */
     public function create()
     {
+        //
     }
 
     /**
@@ -43,26 +40,7 @@ class ExceptionController extends Controller
      */
     public function store(Request $request)
     {
-        $status = $request->status;
-        if($status == 0){
-            //approve
-            $penjadwalan = Jadwal::all()->where('id',$request->id_jadwal)->first();
-            if($penjadwalan->status != 1){
-                $penjadwalan->update([
-                    'tanggal_mulai' => $request->tanggal
-                ]);
-
-                $exception = Exception::all()->where('id',$request->id_exception)->first();
-                $exception->update([
-                    'status_appr' => 1
-                ]);
-                return back()->with('warning','Berhasil , Exception Berhasil Di Approve');
-            }else{
-                return back()->with('error','Tidak Bisa Update Tanggal , Kunjungan Telah Selesai Dilakukan');
-            }
-        }elseif($status == 1){
-            return back()->with('warning','Exception Berhasil Ditolak');
-        }
+        //
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Desa;
 use App\Models\Jadwal;
+use App\Models\Pasien;
 use DB;
 
 use Illuminate\Http\Request;
@@ -50,5 +51,8 @@ class JsonController extends Controller
     }
     public function getDetailException($id){
         echo json_encode(DB::table('vw_detail_exception')->where('id',$id)->first());
+    }
+    public function getDetailPasien($nik){
+        echo json_encode(Pasien::all()->where('nik',$nik)->first());
     }
 }

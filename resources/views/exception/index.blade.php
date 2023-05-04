@@ -28,7 +28,7 @@
                             <ul class="chat-list">
                                 <!-- Belum Approval -->
                                 @foreach($data as $key)
-                                <li class="chat-list-item" data-key="{{$key->id}}">
+                                <li class="chat-list-item approval-item" data-key="{{$key->id}}">
                                     <div class="mr-10">
                                         <span class="img-link img-status">
                                             <img class="img-avatar img-avatar48" src="assets/media/avatars/avatar3.jpg" alt="">
@@ -52,7 +52,7 @@
                     <div class="tab-pane p-15" id="chat-tabs-calls" role="tabpanel" data-simplebar>
                         <ul class="chat-list">
                             @foreach($history as $key)
-                                <li class="chat-list-item" data-key="{{$key->id}}">
+                                <li class="chat-list-item history-item" data-key="{{$key->id}}">
                                     <div class="mr-10">
                                         <span class="img-link img-status">
                                             <img class="img-avatar img-avatar48" src="assets/media/avatars/avatar3.jpg" alt="">
@@ -60,10 +60,7 @@
                                     </div>
                                     <div>
                                         <span class="text-muted">{{date('d M Y',strtotime($key->created_at))}}</span><br>
-                                        <span class="font-w600" >{{$key->nama_lengkap}} <span class="text-muted font-size-xs">( {{$key->nama_desa}} )</span></span>
-                                        <div class="font-size-xs text-muted">
-                                            {{$key->alasan}}
-                                        </div>
+                                        <span class="font-w600" >{{$key->nama}} <span class="text-muted font-size-xs"></span></span>
                                     </div>
                                 </li>
                             @endforeach
@@ -196,7 +193,7 @@
 <script>
     checkedFunc();
     // mendapatkan semua elemen <li> dengan class "chat-list-item"
-    const chatItems = document.querySelectorAll('.chat-list-item');
+    const chatItems = document.querySelectorAll('.approval-item');
 
     // menambahkan event listener ke setiap elemen <li>
     chatItems.forEach(function(chatItem) {

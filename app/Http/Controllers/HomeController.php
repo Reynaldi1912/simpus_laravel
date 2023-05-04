@@ -26,6 +26,8 @@ class HomeController extends Controller
     {
         $user = DB::table('vw_petugas')->get()->count();
         $desa = DB::table('desa')->get()->count();
-        return view('home' , ['totalUser'=> $user , 'totalDesa'=>$desa]);
+        $kunjungan = DB::table('hasil_kunjungan')->get()->count();
+        $pasien = DB::table('pasien')->get()->count();
+        return view('home' , ['totalUser'=> $user , 'totalDesa'=>$desa , 'totalKunjungan'=>$kunjungan ,'totalPasien'=>$pasien]);
     }
 }

@@ -236,6 +236,8 @@
                 fetch('{{route('getUserByIdDesa','')}}'+'/'+id)
                     .then(res => res.json())
                     .then((out) => {
+                        option2.innerHTML += "<option value='null'></option>";
+
                         for (const key in out) {
                             if (Object.hasOwnProperty.call(out, key)) {
                                 const data = out[key];
@@ -259,6 +261,7 @@
                 fetch('{{route('getUserByNamaDesa','')}}'+'/'+nama_desa)
                     .then(res => res.json())
                     .then((out) => {
+                        option2.innerHTML += "<option value='null'></option>";
                         for (const key in out) {
                             if (Object.hasOwnProperty.call(out, key)) {
                                 const data = out[key];

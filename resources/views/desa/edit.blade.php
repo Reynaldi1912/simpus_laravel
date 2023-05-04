@@ -39,7 +39,7 @@
                         </div>
                         <div class="col-4">
                             <label for="">Radius Petugas(KM)</label>
-                            <input type="number" class="form-control" name="txtRadius" id="txtRadius" value="{{$key->radius}}" onchange="getRadius();" required required value="2">
+                            <input type="number" class="form-control" name="txtRadius" id="txtRadius" step="any" value="{{$key->radius}}" onchange="getRadius();" required required value="2">
                         </div>
                     </div>     
                     <div id="map"></div>               

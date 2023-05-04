@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Models\Exception;
 use App\Models\Jadwal;
+use App\Models\History_Exception;
 
 
 class ExceptionController extends Controller
@@ -44,9 +45,9 @@ class ExceptionController extends Controller
     public function store(Request $request)
     {
         $status = $request->status;
+        $penjadwalan = Jadwal::all()->where('id',$request->id_jadwal)->first();
         if($status == 0){
             //approve
-            $penjadwalan = Jadwal::all()->where('id',$request->id_jadwal)->first();
             if($penjadwalan->status != 1){
                 $penjadwalan->update([
                     'tanggal_mulai' => $request->tanggal
@@ -56,12 +57,36 @@ class ExceptionController extends Controller
                 $exception->update([
                     'status_appr' => 1
                 ]);
+
+                $history = new History_Exception();
+                $history->create([
+                   'status_appr' => 1,
+                   'id_user' => $exception->id_user,
+                   'old_date' => $penjadwalan->tanggal_mulai,
+                   'new_date' => $request->tanggal,
+                   'kegiatan' => $penjadwalan->kegiatan
+                ]);
                 return back()->with('warning','Berhasil , Exception Berhasil Di Approve');
-            }else{
-                return back()->with('error','Tidak Bisa Update Tanggal , Kunjungan Telah Selesai Dilakukan');
             }
+            return back()->with('error','Tidak Bisa Update Tanggal , Kunjungan Telah Selesai Dilakukan');
         }elseif($status == 1){
-            return back()->with('warning','Exception Berhasil Ditolak');
+            if($penjadwalan->status != 1){
+                $exception = Exception::all()->where('id',$request->id_exception)->first();
+                $exception->update([
+                    'status_appr' => 2
+                ]);
+
+                $history = new History_Exception();
+                $history->create([
+                   'status_appr' => 2,
+                   'id_user' => $exception->id_user,
+                   'old_date' => $penjadwalan->tanggal_mulai,
+                   'keterangan' => $request->keterangan,
+                   'kegiatan' => $penjadwalan->kegiatan
+                ]);
+                return back()->with('warning','Exception Berhasil Ditolak');
+            }
+            return back()->with('error','Tidak Bisa Update Tanggal , Kunjungan Telah Selesai Dilakukan');
         }
     }
 

@@ -41,4 +41,5 @@ Route::get('get-user-by-nama-desa/{id}', [JsonController::class, 'getUserByNamaD
 Route::get('get-jadwal-by-desa', [JsonController::class, 'getJadwalByDesa'])->name('getJadwalByDesa');
 Route::get('get-detail-exception/{id}', [JsonController::class, 'getDetailException'])->name('getDetailException');
 Route::get('get-detail-pasien/{id}', [JsonController::class, 'getDetailPasien'])->name('getDetailPasien');
+Route::get('get-detail-hasil-kunjungan/{id}', [JsonController::class, 'getDetailHasilKunjungan'])->name('getDetailHasilKunjungan');
 

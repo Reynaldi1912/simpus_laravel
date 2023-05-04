@@ -46,7 +46,7 @@ class JsonController extends Controller
                 'color' => $data->color,
             ];
         }
-
+        // echo json_encode($events);
         return response()->json(['data' => $events]);
     }
     public function getDetailException($id){
@@ -54,5 +54,8 @@ class JsonController extends Controller
     }
     public function getDetailPasien($nik){
         echo json_encode(Pasien::all()->where('nik',$nik)->first());
+    }
+    public function getDetailHasilKunjungan($id){
+        echo json_encode(DB::table('vw_detail_hasil_kunjungan')->where('id',$id)->first());
     }
 }

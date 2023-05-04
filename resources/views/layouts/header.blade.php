@@ -165,7 +165,6 @@
                                 $output = floor($diff / 86400) . ' hari lalu';
                             }
 
-                            echo $output;
                         ?>
 
                         <li>

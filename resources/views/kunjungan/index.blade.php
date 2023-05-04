@@ -8,7 +8,7 @@
             <div class="p-3 block-header-default">
                 <div class="row">
                     <div class="col-6">
-                        <h3 class="block-title">Master Pasien Terdata</h3>
+                        <h3 class="block-title">Hasil Kunjungan</h3>
                     </div>
                     <!-- <div class="col-6 text-right">
                         <a href="{{route('petugas.create')}}" class="btn btn-success">Tambahkan Petugas</a>
@@ -23,9 +23,11 @@
                         <tr>
                             <th class="text-center">No</th>
                             <th class="text-center">nik</th>
-                            <th class="text-center">nama</th>
-                            <th class="text-center" style="width: 15%;">umur</th>
-                            <th class="text-center" style="width: 15%;">bpjs</th>
+                            <th class="text-center">nama pasien</th>
+                            <th class="text-center">tekanan darah</th>
+                            <th class="text-center" style="width: 15%;">diagnosa</th>
+                            <th class="text-center" style="width: 20%;">penyuluhan</th>
+                            <th class="text-center" style="width: 15%;">tanggal input</th>
                             <th class="text-center">aksi</th>
                         </tr>
                     </thead>
@@ -33,15 +35,17 @@
                         <?php
                             $i = 1;
                         ?>
-                    @foreach($pasien as $key)
+                    @foreach($data as $key)
                         <tr>
                             <td class="text-center">{{$i++}}</td>
                             <td class="font-w600 text-center">{{$key->nik}}</td>
-                            <td class="text-center">{{$key->nama}}</td>
-                            <td class="d-none d-sm-table-cell text-center">{{$key->umur}}</td>
-                            <td class="d-none d-sm-table-cell text-center">{{$key->bpjs == 1 ? 'punya':'tidak'}}</td>
+                            <td class="font-w600 text-center">{{$key->nama}}</td>
+                            <td class="text-center">{{$key->tekanan_darah}}</td>
+                            <td class="d-none d-sm-table-cell text-center">{{$key->diagnosa}}</td>
+                            <td class="d-none d-sm-table-cell text-center">{{$key->penyuluhan}}</td>
+                            <td class="d-none d-sm-table-cell text-center">{{$key->created_at}}</td>
                             <td class="text-center">
-                                <button type="button" class="btn btn-sm btn-secondary get-detail" data-toggle="modal" data-target="#modal-current-data" data-key="{{$key->nik}}">
+                                <button type="button" class="btn btn-sm btn-secondary get-detail" data-toggle="modal" data-target="#modal-current-data" data-key="{{$key->id}}">
                                     <i class="fa fa-eye"></i>
                                 </a>
                             </td>
@@ -61,7 +65,7 @@
         <div class="modal-content">
             <div class="block block-themed block-transparent mb-0">
                 <div class="block-header bg-primary-dark">
-                    <h3 class="block-title">Detail Pasien</h3>
+                    <h3 class="block-title">Detail Hasil Kunjungan Pasien</h3>
                     <div class="block-options">
                         <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
                             <i class="si si-close"></i>
@@ -69,42 +73,71 @@
                     </div>
                 </div>
                 <div class="block-content">
+                <span class="text-muted">Nama Petugas : <span id="nama_petugas"></span></span>
+                <br><br>
                     <table>
                         <tbody>
                             <tr>
-                                <td>NIK</td>
+                                <td class="text-black">NIK</td>
                                 <td id="nik"></td>
                             </tr>
                             <tr>
-                                <td>Nama Lengkap</td>
+                                <td class="text-black">Nama Lengkap</td>
                                 <td id="nama"></td>
                             </tr>
                             <tr>
-                                <td>Tanggal Lahir</td>
+                                <td class="text-black">Tanggal Lahir</td>
                                 <td id="tanggal_lahir"></td>
                             </tr>
                             <tr>
-                                <td>Jumlah Anggota Keluarga</td>
+                                <td class="text-black">Jumlah Anggota Keluarga</td>
                                 <td id="jumlah_kk"></td>
                             </tr>
                             <tr>
-                                <td>Alamat</td>
+                                <td class="text-black">Alamat</td>
                                 <td id="alamat"></td>
                             </tr>
                             <tr>
-                                <td>Umur</td>
+                                <td class="text-black">Umur</td>
                                 <td id="umur"></td>
                             </tr>
                             <tr>
-                                <td>Nomor HP</td>
+                                <td class="text-black">Nomor HP</td>
                                 <td id="no_hp"></td>
                             </tr>
                             <tr>
-                                <td>BPJS</td>
+                                <td class="text-black">BPJS</td>
                                 <td id="bpjs"></td>
                             </tr>
                         </tbody>
                     </table>
+                    <br>
+                    <hr>
+                    <h3 class="block-title mt-5 text-muted pb-5">Detail Hasil Kunjungan Pasien</h3>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td class="text-black">Berat Badan</td>
+                                <td id="berat_badan"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-black">Tinggi Badan</td>
+                                <td id="tinggi_badan"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-black">Tekanan Darah</td>
+                                <td id="tekanan_darah"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <span class="text-black">Diagnosa : </span><br>
+                    <span id="diagnosa"></span>
+                    <br>
+                    <span class="text-black">Penyuluhan : </span><br>
+                    <span id="penyuluhan"></span>
+                    <br>
+                    <span class="text-black">Dokumentasi : </span><br>
+                    <span id="dokumentasi"></span><br><br>
                 </div>
             </div>
             <div class="modal-footer">
@@ -126,8 +159,8 @@
             changeDetail(key);
         });
     });
-    function changeDetail($nik){
-        fetch('/get-detail-pasien/'+$nik)
+    function changeDetail(id){
+        fetch('/get-detail-hasil-kunjungan/'+id)
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('nik').textContent = " : "+data.nik;
@@ -138,6 +171,14 @@
                     document.getElementById('umur').textContent = " : "+data.umur;
                     document.getElementById('no_hp').textContent = " : "+data.no_hp;
                     document.getElementById('bpjs').textContent = data.bpjs == "1" ? " : Punya":" : Tidak Punya";
+                    document.getElementById('berat_badan').textContent = " : "+data.berat_badan;
+                    document.getElementById('tinggi_badan').textContent = " : "+data.tinggi_badan;
+                    document.getElementById('tekanan_darah').textContent = " : "+data.tekanan_darah;
+                    document.getElementById('diagnosa').textContent = data.diagnosa;
+                    document.getElementById('penyuluhan').textContent = data.penyuluhan;
+                    document.getElementById('dokumentasi').textContent = data.dokumentasi;
+                    document.getElementById('nama_petugas').textContent = data.nama_petugas;
+
                 })
     }
 </script>

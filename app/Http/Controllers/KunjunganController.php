@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Hasil_Kunjungan;
+use DB;
 
 class KunjunganController extends Controller
 {
@@ -13,7 +15,8 @@ class KunjunganController extends Controller
      */
     public function index()
     {
-        //
+        $data = DB::table('vw_detail_hasil_kunjungan')->get();
+        return view('kunjungan.index',['data'=>$data]);
     }
 
     /**

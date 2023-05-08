@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\JadwalMobileController;
 
 
 /*
@@ -25,3 +26,5 @@ Route::group(['prefix' => 'v1'], function(){
     Route::post('register', [UsersController::class , 'register']);
     Route::get('logout', [UsersController::class , 'logout'])->middleware('auth:api');
 });
+Route::resource('jadwal-mobile', JadwalMobileController::class);
+

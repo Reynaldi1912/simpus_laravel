@@ -60,7 +60,7 @@
                                     </div>
                                     <div>
                                         <span class="text-muted">{{date('d M Y',strtotime($key->created_at))}}</span><br>
-                                        <span class="font-w600" >{{$key->nama}} <span class="text-muted font-size-xs"></span></span>
+                                        <span class="font-w600" >{{$key->id_user}} <span class="text-muted font-size-xs"></span></span>
                                     </div>
                                 </li>
                             @endforeach

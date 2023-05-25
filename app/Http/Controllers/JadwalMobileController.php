@@ -46,7 +46,11 @@ class JadwalMobileController extends Controller
      */
     public function show($id)
     {
-        return response()->json(DB::table('jadwal')->get());
+        return response()->json(DB::table('vw_jadwal')->where('id_desa',$id)->orderBy('tanggal_mulai','asc')->get());
+    }
+    public function show_desa($id)
+    {
+        return response()->json(DB::table('desa')->where('id',$id)->get());
     }
 
     /**

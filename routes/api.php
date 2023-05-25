@@ -27,4 +27,5 @@ Route::group(['prefix' => 'v1'], function(){
     Route::get('logout', [UsersController::class , 'logout'])->middleware('auth:api');
 });
 Route::resource('jadwal-mobile', JadwalMobileController::class);
+Route::get('get-desa/{id}', [JadwalMobileController::class, 'show_desa']);
 

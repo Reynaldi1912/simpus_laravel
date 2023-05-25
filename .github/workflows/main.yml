@@ -8,9 +8,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest    
     steps:    
-      - name: Set up environment
-        run: |
-          export COMPOSER_ALLOW_SUPERUSER=1
+      - name: Set COMPOSER_ALLOW_SUPERUSER
+        run: echo "COMPOSER_ALLOW_SUPERUSER=1" >> $GITHUB_ENV
           
       - name: Deployment
         uses: appleboy/ssh-action@master

@@ -33,6 +33,7 @@ Route::resource('pasien', PasienController::class);
 Route::resource('kunjungan', KunjunganController::class);
 
 Route::resource('penjadwalan', PenjadwalanController::class);
+
 Route::post('upload-excel' , [PenjadwalanController::class , 'uploadJadwal'])->name('uploadJadwal');
 
 Route::get('get-user-by-id-desa/{id}', [JsonController::class, 'getUserByIdDesa'])->name('getUserByIdDesa');

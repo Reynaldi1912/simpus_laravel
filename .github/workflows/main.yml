@@ -22,10 +22,10 @@ jobs:
             sudo git fetch
             sudo git reset --hard origin/master
             sudo git pull
-            sudo composer clear-cache
-            sudo composer dump-autoload --no-cache
-            sudo composer update --no-interaction --prefer-dist --optimize-autoloader --no-dev
-            sudo composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
+            # sudo composer clear-cache
+            # sudo composer dump-autoload --no-cache
+            # sudo composer update --no-interaction --prefer-dist --optimize-autoloader --no-dev
+            # sudo composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
             sudo php artisan optimize:clear
             sudo php artisan route:cache
             sudo php artisan view:cache

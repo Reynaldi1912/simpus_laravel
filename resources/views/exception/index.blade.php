@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    li.chat-list-item.approval-item.active {
+    color: white;
+    background-color: #67ddef;
+}
+</style>
 <main id="main-container">
     <!-- Page Content -->
     <div class="js-chat-container row no-gutters content content-full">
@@ -35,9 +41,9 @@
                                         </span>
                                     </div>
                                     <div>
-                                        <span class="text-muted">{{date('d M Y',strtotime($key->created_at))}}</span><br>
-                                        <span class="font-w600" >{{$key->nama_lengkap}} <span class="text-muted font-size-xs">( {{$key->nama_desa}} )</span></span>
-                                        <div class="font-size-xs text-muted">
+                                        <span class="">{{date('d M Y',strtotime($key->created_at))}}</span><br>
+                                        <span class="font-w600" >{{$key->nama_lengkap}} <span class="font-size-xs">( {{$key->nama_desa}} )</span></span>
+                                        <div class="font-size-xs">
                                             {{$key->alasan}}
                                         </div>
                                     </div>
@@ -92,7 +98,7 @@
                         </div>
                     </div>
                     <div class="ml-10">
-                        <div class="font-size-sm text-muted" id="exception_date"></div>
+                        <span class="text-muted">Diajukan Pada <span id="exception_date"></span></span>
                         <button type="button" class="d-md-none btn btn-sm btn-circle btn-alt-success ml-5" data-toggle="class-toggle" data-target=".js-chat-options" data-class="d-none">
                             <i class="fa fa-bars"></i>
                         </button>
@@ -103,14 +109,13 @@
                 <!-- Chat Window -->
                 <div class="js-chat-window p-15 bg-light flex-grow-1 text-wrap-break-word overflow-y-auto">
                     <!-- User Message -->
-                    <form action="" method="post" class="container-fluid bg-white p-5">
-                        @csrf
+                    <div class="container-fluid bg-white p-5">
                         <div class="m-5">
                             <div class="row pl-5">
                                 <div class="col">
-                                    <h5>Detail Exception</h5>
+                                    <p><b>Detail Exception</b> ( <span class="text-muted">Kegiatan Pada Tanggal : <span id="tanggal_kegiatan"></span></span>)</p>
                                 </div>
-                                <div class="col  text-right">
+                                <div class="col-3 text-right">
                                     <p class="text-mute">kunjungan</p>
                                 </div>
                             </div>
@@ -121,16 +126,6 @@
                                             <td>Upaya Kesehatan</td>
                                             <td>:</td>
                                             <td id="upaya_kesehatan"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Kegiatan</td>
-                                            <td>:</td>
-                                            <td id="kegiatan"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Tanggal Kegiatan</td>
-                                            <td>:</td>
-                                            <td id="tanggal_kegiatan"></td>
                                         </tr>
                                         <tr>
                                             <td><b>Alasan</b></td>
@@ -180,7 +175,7 @@
                                 </form>
                             </div>
                         </div>
-                    </form>    
+                    </div>    
                 </div>
                 <!-- END Chat Input -->
             </div>
@@ -191,6 +186,22 @@
 </main>
 
 <script>
+    // mendapatkan semua elemen <li> dengan class "chat-list-item"
+    const _chatItems = document.querySelectorAll('.approval-item');
+
+    // menambahkan event listener ke setiap elemen <li>
+    _chatItems.forEach(function(chatItem) {
+        chatItem.addEventListener('click', function() {
+            // menghapus kelas "active" dari semua elemen <li>
+            _chatItems.forEach(function(item) {
+                item.classList.remove('active');
+            });
+            
+            // menambahkan kelas "active" ke elemen yang diklik
+            chatItem.classList.add('active');
+        });
+    });
+
     checkedFunc();
     // mendapatkan semua elemen <li> dengan class "chat-list-item"
     const chatItems = document.querySelectorAll('.approval-item');
@@ -209,13 +220,13 @@
         fetch('/get-detail-exception/'+key)
             .then(response => response.json())
             .then(data => {
-                document.getElementById('id_jadwal').value = data.id_jadwal;
+
+                console.log(data);
                 document.getElementById('username').value = data.username;
                 document.getElementById('id_exception').value = data.id;
 
                 document.getElementById('tanggal_kegiatan').textContent =  moment(data.tanggal_mulai).format('DD-MM-YYYY');
                 document.getElementById('upaya_kesehatan').textContent = data.upaya_kesehatan;
-                document.getElementById('kegiatan').textContent = data.kegiatan;
                 document.getElementById('alasan').textContent = data.alasan;
                 document.getElementById('desa').textContent = data.nama_desa;
                 document.getElementById('nama').textContent = data.nama_lengkap;

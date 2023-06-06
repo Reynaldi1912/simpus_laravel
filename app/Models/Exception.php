@@ -10,7 +10,7 @@ class Exception extends Model
     use HasFactory;
     protected $table = 'exception';
     protected $fillable = [
-        'id','id_jadwal','id_user','alasan','status_appr' , 'exception_status' , 'tanggal_jadwal',
+        'id','id_user','alasan','status_appr' , 'tanggal_jadwal',
     ];
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -48,7 +48,7 @@ class ExceptionMobileController extends Controller
         $outputDate = $inputDate->isoFormat('D MMMM');
         
         if($getJadwal != null){
-            $cekException = Exception::all()->where('id_jadwal',$getJadwal->id)->where('id_user',$request->id);
+            $cekException = Exception::all()->where('tanggal_jadwal',$request->tanggal)->where('id_user',$request->id);
             if($cekException->isNotEmpty()){
                 return response()->json([
                     'message' => 'Exception Tanggal '.$outputDate.' Anda Sudah Diajukan',
@@ -56,9 +56,7 @@ class ExceptionMobileController extends Controller
                 ], 200);
             }else{
                 Exception::create([
-                    'id_jadwal' => $getJadwal->id,
                     'id_user' => $request->id,
-                    'exception_status' => $request->status,
                     'alasan' => $request->alasan,
                     'status_appr' => 0,
                     'tanggal_jadwal' => $request->tanggal
@@ -85,7 +83,7 @@ class ExceptionMobileController extends Controller
     {
         $exceptions = DB::table('exception')
             ->where('id_user', $id)
-            ->select('exception.id', 'exception.id_jadwal', 'exception.id_user', 'exception.exception_status', 'exception.alasan','status_appr', DB::raw("DATE_FORMAT(tanggal_jadwal, '%d %M %Y') as tanggal_mulai"), DB::raw("DATE_FORMAT(exception.created_at, '%d %M %Y') as created_at"))
+            ->select('exception.id','exception.id_user', 'exception.alasan','status_appr', DB::raw("DATE_FORMAT(tanggal_jadwal, '%d %M %Y') as tanggal_mulai"), DB::raw("DATE_FORMAT(exception.created_at, '%d %M %Y') as created_at"))
             ->get();
     
         return response()->json($exceptions);

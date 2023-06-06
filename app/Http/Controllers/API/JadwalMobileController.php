@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+
 class JadwalMobileController extends Controller
 {
     /**
@@ -50,7 +51,7 @@ class JadwalMobileController extends Controller
     }
     public function show_desa($id)
     {
-        return response()->json(DB::table('desa')->where('id',$id)->get());
+        return response()->json(DB::table('desa')->where('id',$id)->first());
     }
 
     /**

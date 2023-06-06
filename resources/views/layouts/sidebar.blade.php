@@ -24,7 +24,7 @@
 
                             <!-- Logo -->
                             <div class="content-header-item">
-                                <a class="link-effect font-w700" href="index.html">
+                                <a class="link-effect font-w700">
                                     <i class="si si-fire text-primary"></i>
                                     <span class="font-size-xl text-dual-primary-dark">code</span><span class="font-size-xl text-primary">base</span>
                                 </a>
@@ -45,12 +45,13 @@
 
                         <!-- Visible only in normal mode -->
                         <div class="sidebar-mini-hidden-b text-center">
-                            <a class="img-link" href="be_pages_generic_profile.html">
+                            <a class="img-link">
                                 <img class="img-avatar" src="/assets/media/avatars/avatar15.jpg" alt="">
                             </a>
                             <ul class="list-inline mt-10">
                                 <li class="list-inline-item">
-                                    <a class="link-effect text-dual-primary-dark font-size-sm font-w600 text-uppercase" href="be_pages_generic_profile.html">{{ Auth::user()->id }}</a>
+                                    <a class="link-effect text-dual-primary-dark font-size-sm font-w600 text-uppercase">ADMIN</a><br>
+                                    <a class="link-effect text-dual-primary-dark font-size-sm font-w600 text-uppercase">{{ Auth::user()->id }}</a>
                                 </li>
                             </ul>
                         </div>
@@ -68,9 +69,6 @@
                             <li>
                                 <a href="{{route('kunjungan.index')}}"><i class="fa fa-stethoscope"></i><span class="sidebar-mini-hide">Kunjungan</span></a>
                             </li>
-                            <!-- <li>
-                                <a href="be_pages_dashboard.html"><i class="si si-book-open"></i><span class="sidebar-mini-hide">Kegiatan</span></a>
-                            </li> -->
                             <li>
                                 <a href="{{route('penjadwalan.index')}}"><i class="si si-calendar"></i><span class="sidebar-mini-hide">Penjadwalan</span></a>
                             </li>

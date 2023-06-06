@@ -3,8 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
-use App\Http\Controllers\JadwalMobileController;
-use App\Http\Controllers\ExceptionMobileController;
+use App\Http\Controllers\API\JadwalMobileController;
+use App\Http\Controllers\API\ExceptionMobileController;
+use App\Http\Controllers\API\KunjunganMobileController;
 
 
 /*
@@ -29,5 +30,6 @@ Route::group(['prefix' => 'v1'], function(){
 });
 Route::resource('exception_mobile', ExceptionMobileController::class);
 Route::resource('jadwal-mobile', JadwalMobileController::class);
+Route::resource('kunjungan-mobile', KunjunganMobileController::class);
 Route::get('get-desa/{id}', [JadwalMobileController::class, 'show_desa']);
 

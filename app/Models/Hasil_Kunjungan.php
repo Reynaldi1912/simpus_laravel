@@ -10,6 +10,6 @@ class Hasil_Kunjungan extends Model
     use HasFactory;
     protected $table = 'hasil_kunjungan';
     protected $fillable = [
-        'id','nik','berat_badan','tinggi_badan','tekanan_darah','penyuluhan','dokumentasi','created_at','updated_at','created_by','updated_by'
+        'id','nik','berat_badan','tinggi_badan','tekanan_darah','penyuluhan','dokumentasi','diagnosa','created_at','updated_at','created_by','updated_by'
         ];
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
-use App\Models\hasil_Kunjungan;
+use App\Models\Hasil_Kunjungan;
 use App\Models\Pasien;
 use Intervention\Image\Facades\Image;
 

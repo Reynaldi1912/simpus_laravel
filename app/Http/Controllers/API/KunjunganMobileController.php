@@ -39,34 +39,52 @@ class KunjunganMobileController extends Controller
      */
     public function store(Request $request)
     {
+        $today = date('Y-m-d');
+
         $image = $request->file('image');
 
         // Menyimpan gambar ke direktori yang diinginkan
         $imageName = $image->getClientOriginalName();
         $image->move(public_path('images'), $imageName);
 
-        Pasien::create([
-            'nik' => $request->nik ,
-            'nama' =>$request->nama ,
-            'jml_anggota_keluarga' => $request->jml_anggota_keluarga ,
-            'tgl_lahir' => $request->tanggal_lahir ,
-            'umur' => $request->umur ,
-            'alamat' => $request->alamat ,
-            'no_hp' => $request->no_hp ,
-            'bpjs' => $request->bpjs ,
-            'created_by' =>$request->created_by
-        ]);
+        Pasien::updateOrCreate(
+            [
+                'nik' => $request->nik,
+            ],
+            [
+                'nik' => $request->nik ,
+                'nama' =>$request->nama ,
+                'jml_anggota_keluarga' => $request->jml_anggota_keluarga ,
+                'tgl_lahir' => $request->tanggal_lahir ,
+                'umur' => $request->umur ,
+                'alamat' => $request->alamat ,
+                'no_hp' => $request->no_hp ,
+                'bpjs' => $request->bpjs ,
+                'created_by' =>$request->created_by
+            ]
+        );
 
-        Hasil_Kunjungan::create([
-            'nik' => $request->nik ,
-            'berat_badan' => (float) $request->berat_badan,
-            'tinggi_badan' => $request->tinggi_badan,
-            'tekanan_darah' => $request->tekanan_darah,
-            'penyuluhan' => $request->penyuluhan,
-            'diagnosa' => $request->diagnosa,
-            'dokumentasi' => $imageName,
-            'created_by' => $request->created_by
-        ]);
+        Hasil_Kunjungan::updateOrCreate(
+            [
+                'nik' => $request->nik,
+                'created_at' => $today
+            ],
+            [
+                'nik' => $request->nik ,
+                'berat_badan' => (float) $request->berat_badan,
+                'tinggi_badan' => $request->tinggi_badan,
+                'tekanan_darah' => $request->tekanan_darah,
+                'penyuluhan' => $request->penyuluhan,
+                'diagnosa' => $request->diagnosa,
+                'dokumentasi' => $imageName,
+                'created_by' => $request->created_by
+            ]
+        );
+
+        return response()->json([
+            'message' => 'Kunjungan Berhasil Di Inputkan',
+            'isSuccess' => true,
+        ], 200);
     }
 
     /**
@@ -95,7 +113,16 @@ class KunjunganMobileController extends Controller
      */
     public function edit($id)
     {
-        //
+        $results = DB::table('hasil_kunjungan as a')
+                    ->leftJoin('pasien as b', 'a.nik', '=', 'b.nik')
+                    ->leftJoin('users as c', 'a.created_by', '=', 'c.id')
+                    ->leftJoin('desa as d', 'c.id_desa', '=', 'd.id')
+                    ->select('b.nama', 'b.jml_anggota_keluarga', 'b.tgl_lahir', 'b.umur', 'b.alamat', 'b.no_hp', 'b.bpjs', 'a.*', 'd.nama_desa', 'c.id_desa')
+                    ->whereDate('a.created_at', date('Y-m-d'))
+                    ->where('id_desa',$id)
+                    ->first();
+        return response()->json($results);
+
     }
 
     /**

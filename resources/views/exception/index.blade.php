@@ -6,6 +6,10 @@
     color: white;
     background-color: #67ddef;
 }
+li.chat-list-item.history-item.active {
+    color: white;
+    background-color: #67ddef;
+}
 </style>
 <main id="main-container">
     <!-- Page Content -->
@@ -66,7 +70,8 @@
                                     </div>
                                     <div>
                                         <span class="text-muted">{{date('d M Y',strtotime($key->created_at))}}</span><br>
-                                        <span class="font-w600" >{{$key->id_user}} <span class="text-muted font-size-xs"></span></span>
+                                        <span class="font-w600 border-bottom pb-1">{{$key->nama_lengkap}}  <span class="text-muted font-size-xs">({{$key->status_appr = 1? 'Disetujui' : 'Ditolak'}})</span></span>
+                                        <p class="font-w600 pt-2">{{$key->kegiatan}}</p>
                                     </div>
                                 </li>
                             @endforeach
@@ -85,6 +90,8 @@
         <!-- Clicked Content -->
         <div class="col-md-6 col-lg-8 bg-white" id="fullContent">
         </div>
+
+        <!-- exception content -->
             <div class="col-md-6 col-lg-8 bg-white" id="content" style="display:none;">
                 <!-- Active Chat User -->
                 <div class="js-chat-active-user p-15 d-flex align-items-center justify-content-between bg-white">
@@ -142,8 +149,9 @@
                                     <div class="col">
                                         <h5>FORM APPROVAL</h5>
                                         <input type="hidden" id="id_exception" name="id_exception">
-                                        <input type="hidden" id="id_jadwal" name="id_jadwal">
+                                        <input type="hidden" id="tanggal_kegiatan_inp" name="tanggal_kegiatan">
                                         <input type="hidden" id="username" name="username">
+                                        <input type="hidden" id="id_desa" name="id_desa">
                                         <div class="row">
                                             <div class="col-12">
                                                 <label class="css-control css-control-lg css-control-primary css-radio">
@@ -179,6 +187,61 @@
                 </div>
                 <!-- END Chat Input -->
             </div>
+            <!-- end of exception content -->
+
+            <!-- history content -->
+            <div class="col-md-6 col-lg-8 bg-white" id="content-history" style="display:none;">
+                <!-- Active Chat User -->
+                <div class="js-chat-active-user p-15 d-flex align-items-center justify-content-between bg-white">
+                    <div class="d-flex align-items-center">
+                        <a class="img-link img-status" href="javascript:void(0)">
+                            <img class="img-avatar img-avatar32" src="assets/media/avatars/avatar12.jpg" alt="Avatar">
+                        </a>
+                        <div class="ml-10">
+                            <a class="font-w600" href="javascript:void(0)" id="nama_history"></a>
+                            <div class="font-size-sm text-muted" id="desa_history"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Active Chat User -->
+
+                <!-- Chat Window -->
+                <div class="js-chat-window p-15 bg-light flex-grow-1 text-wrap-break-word overflow-y-auto">
+                    <!-- User Message -->
+                    <div class="container-fluid bg-white p-5">
+                        <div class="m-5">
+                            <div class="row m-5">
+                                <table cellpadding='7'>
+                                    <tbody>
+                                        <tr>
+                                            <td><b>Kegiatan</b></td>
+                                            <td>:</td>
+                                            <td><b id="kegiatan"></b></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Status Approval</b></td>
+                                            <td>:</td>
+                                            <td><b id="status_appr"></b></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Tanggal Kegiatan (Lama)</b></td>
+                                            <td>:</td>
+                                            <td><b id="old_date"></b></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Tanggal Kegiatan (Baru)</b></td>
+                                            <td>:</td>
+                                            <td><b id="new_date"></b></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+                <!-- END Chat Input -->
+            </div>
+            <!-- end of history content -->
         <!-- END Right Column -->
     </div>
     <!-- END Page Content -->
@@ -188,6 +251,7 @@
 <script>
     // mendapatkan semua elemen <li> dengan class "chat-list-item"
     const _chatItems = document.querySelectorAll('.approval-item');
+    const _historyItems = document.querySelectorAll('.history-item');
 
     // menambahkan event listener ke setiap elemen <li>
     _chatItems.forEach(function(chatItem) {
@@ -202,12 +266,22 @@
         });
     });
 
+    // menambahkan event listener ke setiap elemen <li>
+    _historyItems.forEach(function(chatItem) {
+        chatItem.addEventListener('click', function() {
+            // menghapus kelas "active" dari semua elemen <li>
+            _historyItems.forEach(function(item) {
+                item.classList.remove('active');
+            });
+            
+            // menambahkan kelas "active" ke elemen yang diklik
+            chatItem.classList.add('active');
+        });
+    });
     checkedFunc();
-    // mendapatkan semua elemen <li> dengan class "chat-list-item"
-    const chatItems = document.querySelectorAll('.approval-item');
 
     // menambahkan event listener ke setiap elemen <li>
-    chatItems.forEach(function(chatItem) {
+    _chatItems.forEach(function(chatItem) {
         chatItem.addEventListener('click', function() {
             // panggil fungsi getCurrentContent() dengan argumen dari data-key
             const key = chatItem.getAttribute('data-key');
@@ -216,21 +290,31 @@
             getCurrentContents(key);
         });
     });
-    function getCurrentContents(key){
-        fetch('/get-detail-exception/'+key)
+    _historyItems.forEach(function(chatItem) {
+        chatItem.addEventListener('click', function() {
+            // panggil fungsi getCurrentContent() dengan argumen dari data-key
+            const key = chatItem.getAttribute('data-key');
+            document.getElementById("content-history").style.display = "block";
+            document.getElementById("fullContent").style.display = "none";
+            getCurrentContentHistory(key);
+        });
+    });
+
+    function getCurrentContentHistory(key){
+        fetch('/get-detail-history-exception/'+key)
             .then(response => response.json())
             .then(data => {
-
                 console.log(data);
-                document.getElementById('username').value = data.username;
-                document.getElementById('id_exception').value = data.id;
-
-                document.getElementById('tanggal_kegiatan').textContent =  moment(data.tanggal_mulai).format('DD-MM-YYYY');
-                document.getElementById('upaya_kesehatan').textContent = data.upaya_kesehatan;
-                document.getElementById('alasan').textContent = data.alasan;
-                document.getElementById('desa').textContent = data.nama_desa;
-                document.getElementById('nama').textContent = data.nama_lengkap;
-                document.getElementById('exception_date').textContent = moment(data.created_at).format('DD-MM-YYYY');
+                // document.getElementById('id_desa').value = data.id_desa;
+                // document.getElementById('username').value = data.username;
+                document.getElementById('status_appr').textContent = data.status_appr = 1 ? "DISETUJUI" : "DITOLAK" ;
+                document.getElementById('old_date').textContent =  moment(data.old_date).format('DD-MM-YYYY');
+                document.getElementById('new_date').textContent =  moment(data.new_date).format('DD-MM-YYYY');
+                document.getElementById('kegiatan').textContent = data.kegiatan;
+                // document.getElementById('alasan').textContent = data.alasan;
+                document.getElementById('desa_history').textContent = data.nama_desa;
+                document.getElementById('nama_history').textContent = data.nama_lengkap;
+                // document.getElementById('exception_date').textContent = moment(data.created_at).format('DD-MM-YYYY');
             });
     }
     function checkedFunc(){

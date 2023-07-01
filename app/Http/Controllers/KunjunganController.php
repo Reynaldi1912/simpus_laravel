@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Hasil_Kunjungan;
 use DB;
-
+use PDF;
 class KunjunganController extends Controller
 {
     /**
@@ -48,7 +48,12 @@ class KunjunganController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = DB::table('vw_detail_hasil_kunjungan')->where('id',$id)->first();
+        $pdf = PDF::loadview('kunjungan.index_pdf',['data'=>$data]);
+        $pdf->set_paper("a4", "portrait");
+        $pdf->render();
+        return $pdf->stream('hasil-kunjungan.pdf', ['Attachment' => false]);
+        // return view('kunjungan.index_pdf');
     }
 
     /**

@@ -23,7 +23,7 @@ class ExceptionController extends Controller
     public function index()
     {
         $data = DB::table('vw_detail_exception')->where('status_appr','0')->where('status_kunjungan','0')->get();
-        $history = DB::table('history_exception')->get();
+        $history = DB::table('vw_detail_history_exception')->get();
         return view('exception.index' , ['data'=>$data , 'history'=>$history]);
     }
 
@@ -44,8 +44,9 @@ class ExceptionController extends Controller
      */
     public function store(Request $request)
     {
-        $status = $request->status;
-        $penjadwalan = Jadwal::all()->where('id',$request->id_jadwal)->first();
+        $status = $request->status; 
+        $date = date_create_from_format('d-m-Y', $request->tanggal_kegiatan);
+        $penjadwalan = Jadwal::all()->where('tanggal_mulai',date_format($date, 'Y-m-d'))->where('id_desa',$request->id_desa)->first();
         if($status == 0){
             //approve
             if($penjadwalan->status != 1){
@@ -54,9 +55,7 @@ class ExceptionController extends Controller
                 ]);
 
                 $exception = Exception::all()->where('id',$request->id_exception)->first();
-                $exception->update([
-                    'status_appr' => 1
-                ]);
+                $exception->delete();
 
                 $history = new History_Exception();
                 $history->create([
@@ -72,9 +71,7 @@ class ExceptionController extends Controller
         }elseif($status == 1){
             if($penjadwalan->status != 1){
                 $exception = Exception::all()->where('id',$request->id_exception)->first();
-                $exception->update([
-                    'status_appr' => 2
-                ]);
+                $exception->delete();
 
                 $history = new History_Exception();
                 $history->create([

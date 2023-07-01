@@ -52,6 +52,9 @@ class JsonController extends Controller
     public function getDetailException($id){
         echo json_encode(DB::table('vw_detail_exception')->where('id',$id)->first());
     }
+    public function getDetailHistoryException($id){
+        echo json_encode(DB::table('vw_detail_history_exception')->where('id',$id)->first());
+    }
     public function getDetailPasien($nik){
         echo json_encode(Pasien::all()->where('nik',$nik)->first());
     }

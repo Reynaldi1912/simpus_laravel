@@ -66,6 +66,7 @@
             <div class="block block-themed block-transparent mb-0">
                 <div class="block-header bg-primary-dark">
                     <h3 class="block-title">Detail Hasil Kunjungan Pasien</h3>
+                    <div id="print"></div>
                     <div class="block-options">
                         <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
                             <i class="si si-close"></i>
@@ -163,6 +164,7 @@
         fetch('/get-detail-hasil-kunjungan/'+id)
                 .then(response => response.json())
                 .then(data => {
+                    console.log(data);
                     document.getElementById('nik').textContent = " : "+data.nik;
                     document.getElementById('nama').textContent = " : "+data.nama;
                     document.getElementById('tanggal_lahir').textContent = " : "+data.tgl_lahir;
@@ -176,9 +178,9 @@
                     document.getElementById('tekanan_darah').textContent = " : "+data.tekanan_darah;
                     document.getElementById('diagnosa').textContent = data.diagnosa;
                     document.getElementById('penyuluhan').textContent = data.penyuluhan;
-                    document.getElementById('dokumentasi').textContent = data.dokumentasi;
+                    document.getElementById('dokumentasi').innerHTML = "<img src='/images/" + data.dokumentasi + "' alt=''>";
                     document.getElementById('nama_petugas').textContent = data.nama_petugas;
-
+                    document.getElementById('print').innerHTML = "<a href='/kunjungan/"+data.id+"' class='btn btn-success'>Print Hasil Kunjungan</a>";
                 })
     }
 </script>

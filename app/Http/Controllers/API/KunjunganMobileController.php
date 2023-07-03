@@ -8,6 +8,8 @@ use DB;
 use App\Models\Hasil_Kunjungan;
 use App\Models\Pasien;
 use App\Models\Jadwal;
+use App\Models\Desa;
+use App\Models\User;
 use Intervention\Image\Facades\Image;
 
 class KunjunganMobileController extends Controller
@@ -29,7 +31,7 @@ class KunjunganMobileController extends Controller
      */
     public function create()
     {
-        //
+       
     }
 
     /**
@@ -43,6 +45,7 @@ class KunjunganMobileController extends Controller
         $today = date('Y-m-d');
 
         $image = $request->file('image');
+
 
         // Menyimpan gambar ke direktori yang diinginkan
         $imageName = $image->getClientOriginalName();
@@ -106,12 +109,17 @@ class KunjunganMobileController extends Controller
      */
     public function show($id)
     {
-        $result = DB::table('hasil_kunjungan as a')
-            ->leftJoin('pasien as b', 'a.nik', '=', 'b.nik')
-            ->leftJoin('jadwal as c', DB::raw('DATE(a.created_at)'), '=', DB::raw('DATE(c.tanggal_mulai)'))
-            ->select('a.*', 'b.nama', 'b.jml_anggota_keluarga', 'b.alamat', 'b.bpjs', 'b.no_hp', 'b.tgl_lahir', 'b.umur', 'c.upaya_kesehatan', 'c.tanggal_mulai')
-            ->where('a.created_by', $id)
+        $user_id_desa = User::where('id',$id)->first()->id_desa;
+        $result = DB::table('hasil_kunjungan AS a')
+            ->select(DB::raw('DISTINCT a.*, b.nama, b.jml_anggota_keluarga, b.alamat, b.bpjs, b.no_hp, b.tgl_lahir, b.umur, c.upaya_kesehatan, c.tanggal_mulai, d.id_desa'))
+            ->leftJoin('pasien AS b', 'a.nik', '=', 'b.nik')
+            ->leftJoin('jadwal AS c', DB::raw('DATE(a.created_at)'), '=', DB::raw('DATE(c.tanggal_mulai)'))
+            ->leftJoin('users AS d', 'a.created_by', '=', 'd.id')
+            ->leftJoin('desa AS e', 'd.id_desa', '=', 'd.id')
+            ->where('d.id_desa', $user_id_desa)
             ->get();
+
+    
 
         return response()->json($result);
     }

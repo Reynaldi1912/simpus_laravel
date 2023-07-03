@@ -178,7 +178,7 @@
                     document.getElementById('tekanan_darah').textContent = " : "+data.tekanan_darah;
                     document.getElementById('diagnosa').textContent = data.diagnosa;
                     document.getElementById('penyuluhan').textContent = data.penyuluhan;
-                    document.getElementById('dokumentasi').innerHTML = "<img src='/images/" + data.dokumentasi + "' alt=''>";
+                    document.getElementById('dokumentasi').innerHTML = "<img src='/images/" + data.dokumentasi + "' alt='' width='300px'>";
                     document.getElementById('nama_petugas').textContent = data.nama_petugas;
                     document.getElementById('print').innerHTML = "<a href='/kunjungan/"+data.id+"' class='btn btn-success'>Print Hasil Kunjungan</a>";
                 })

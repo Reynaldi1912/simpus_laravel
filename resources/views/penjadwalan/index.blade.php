@@ -32,7 +32,6 @@
                                 <textarea type="text" class="form-control mb-3" name="txtkegiatan" placeholder="Kegiatan" required></textarea>
                                 <input type="date" class="form-control mb-3" name="txtTanggalPelaksanaan" placeholder="Tanggal Pelaksanaan" required>
                                 <textarea type="text" class="form-control mb-3" name="txtRincianPelaksanaan" placeholder="Rincian Pelaksanaan" required></textarea>
-                                <input type="number" class="form-control mb-3" name="txtJumlahSasaran" placeholder="Jumlah Sasaran" required>
                                 <label for="" class="mt-5">Penugasan</label>
                                 <select class="form-control mb-3" name="slctDesa" onchange="userOption()" id="slctPenugasan" required>
                                     <option value="0">Pilih Desa</option>

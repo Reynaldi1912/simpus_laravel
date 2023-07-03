@@ -82,9 +82,14 @@ class ExceptionMobileController extends Controller
     public function show($id)
     {
         $exceptions = DB::table('exception')
-            ->where('id_user', $id)
-            ->select('exception.id','exception.id_user', 'exception.alasan','status_appr', DB::raw("DATE_FORMAT(tanggal_jadwal, '%d %M %Y') as tanggal_mulai"), DB::raw("DATE_FORMAT(exception.created_at, '%d %M %Y') as created_at"))
-            ->get();
+                        ->select('exception.id', 'exception.id_user', 'exception.alasan', 'status_appr', DB::raw("DATE_FORMAT(tanggal_jadwal, '%d %M %Y') as tanggal_mulai"), DB::raw("DATE_FORMAT(exception.created_at, '%d %M %Y') as created_at"))
+                        ->where('id_user', $id)
+                        ->union(function ($query) {
+                            $query->select('id', 'id_user', DB::raw("IF(status_appr = 1, 'Disetujui', keterangan) AS alasan"), 'status_appr', DB::raw("DATE_FORMAT(old_date, '%d %M %Y') as tanggal_mulai"), DB::raw("DATE_FORMAT(created_at, '%d %M %Y')"))
+                                ->from('history_exception');
+                        })
+                        ->get();
+
     
         return response()->json($exceptions);
     }

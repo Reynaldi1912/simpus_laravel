@@ -45,8 +45,13 @@ class ExceptionController extends Controller
     public function store(Request $request)
     {
         $status = $request->status; 
-        $date = date_create_from_format('d-m-Y', $request->tanggal_kegiatan);
-        $penjadwalan = Jadwal::all()->where('tanggal_mulai',date_format($date, 'Y-m-d'))->where('id_desa',$request->id_desa)->first();
+        $dateString = $request->tanggal_kegiatan;
+        $date = date_create($dateString);
+        $formattedDate = date_format($date, 'Y-m-d');
+        
+        $penjadwalan = Jadwal::where('tanggal_mulai', $formattedDate)
+                        ->where('id_desa', $request->id_desa)
+                        ->first();
         if($status == 0){
             //approve
             if($penjadwalan->status != 1){

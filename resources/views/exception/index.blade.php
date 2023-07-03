@@ -317,6 +317,23 @@ li.chat-list-item.history-item.active {
                 // document.getElementById('exception_date').textContent = moment(data.created_at).format('DD-MM-YYYY');
             });
     }
+    function getCurrentContents(key){
+        fetch('/get-detail-exception/'+key)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                document.getElementById('upaya_kesehatan').textContent = data.kegiatan;
+                document.getElementById('alasan').textContent =  data.alasan;
+                document.getElementById('tanggal_kegiatan').textContent =  moment(data.tanggal_mulai).format('DD-MM-YYYY');
+
+                document.getElementById('id_exception').value =  data.id;
+                document.getElementById('tanggal_kegiatan_inp').value =  data.tanggal_mulai;
+                document.getElementById('username').value =  data.username;
+                document.getElementById('id_desa').value =  data.id_desa;
+                document.getElementById('exception_date').textContent = moment(data.created_at).format('DD-MM-YYYY');
+
+            });
+    }
     function checkedFunc(){
         value = $("input[name=status]:checked").val();
         txtInput = $("#txtInput");

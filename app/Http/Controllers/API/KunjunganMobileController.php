@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Models\Hasil_Kunjungan;
 use App\Models\Pasien;
+use App\Models\Jadwal;
 use Intervention\Image\Facades\Image;
 
 class KunjunganMobileController extends Controller
@@ -80,6 +81,16 @@ class KunjunganMobileController extends Controller
                 'created_by' => $request->created_by
             ]
         );
+
+        $jadwalKunjungan = Jadwal::where('id_desa', $request->id_desa)
+        ->where('tanggal_mulai', $today)
+        ->first();
+    
+        if ($jadwalKunjungan) {
+            $jadwalKunjungan->status = 1;
+            $jadwalKunjungan->save();
+        }
+    
 
         return response()->json([
             'message' => 'Kunjungan Berhasil Di Inputkan',

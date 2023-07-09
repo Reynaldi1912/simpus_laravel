@@ -4,11 +4,15 @@
 <style>
     li.chat-list-item.approval-item.active {
     color: white;
-    background-color: #67ddef;
+    background-color: #318CE7;
 }
 li.chat-list-item.history-item.active {
     color: white;
-    background-color: #67ddef;
+    background-color: #318CE7;
+}
+li.chat-list-item.history-item.active {
+    color: white;
+    background-color: #318CE7;
 }
 </style>
 <main id="main-container">
@@ -45,7 +49,7 @@ li.chat-list-item.history-item.active {
                                         </span>
                                     </div>
                                     <div>
-                                        <span class="">{{date('d M Y',strtotime($key->created_at))}}</span><br>
+                                        <span style="font-size: 10px;">Diajukan pada {{date('d M Y',strtotime($key->created_at))}}</span><br>
                                         <span class="font-w600" >{{$key->nama_lengkap}} <span class="font-size-xs">( {{$key->nama_desa}} )</span></span>
                                         <div class="font-size-xs">
                                             {{$key->alasan}}
@@ -69,8 +73,8 @@ li.chat-list-item.history-item.active {
                                         </span>
                                     </div>
                                     <div>
-                                        <span class="text-muted">{{date('d M Y',strtotime($key->created_at))}}</span><br>
-                                        <span class="font-w600 border-bottom pb-1">{{$key->nama_lengkap}}  <span class="text-muted font-size-xs">({{$key->status_appr == 1? 'Disetujui' : 'Ditolak'}})</span></span>
+                                        <span style="font-size: 10px;">diajukan pada {{date('d M Y',strtotime($key->created_at))}}</span><br>
+                                        <span class="font-w600 border-bottom pb-1">{{$key->nama_lengkap}}  <span class=" font-size-xs">({{$key->status_appr == 1? 'Disetujui' : 'Ditolak'}})</span></span>
                                         <p class="font-w600 pt-2">{{$key->kegiatan}}</p>
                                     </div>
                                 </li>
@@ -233,6 +237,11 @@ li.chat-list-item.history-item.active {
                                             <td>:</td>
                                             <td><b id="new_date"></b></td>
                                         </tr>
+                                        <tr id="row_alasan">
+                                            <td><b>Keterangan Penolakan</b></td>
+                                            <td>:</td>
+                                            <td><b id="alasan_penolakan"></b></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -316,6 +325,7 @@ li.chat-list-item.history-item.active {
                 // document.getElementById('alasan').textContent = data.alasan;
                 document.getElementById('desa_history').textContent = data.nama_desa;
                 document.getElementById('nama_history').textContent = data.nama_lengkap;
+                document.getElementById('alasan_penolakan').textContent = data.keterangan == null ? '-' : data.keterangan;
                 // document.getElementById('exception_date').textContent = moment(data.created_at).format('DD-MM-YYYY');
             });
     }
@@ -333,7 +343,6 @@ li.chat-list-item.history-item.active {
                 document.getElementById('username').value =  data.username;
                 document.getElementById('id_desa').value =  data.id_desa;
                 document.getElementById('exception_date').textContent = moment(data.created_at).format('DD-MM-YYYY');
-
             });
     }
     function checkedFunc(){

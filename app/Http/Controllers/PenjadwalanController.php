@@ -44,7 +44,6 @@ class PenjadwalanController extends Controller
         Excel::import(new PenjadwalanImport, $request->excel);
         return redirect()->route('penjadwalan.index')->with('success', 'Berhasil Import Jadwal');
     }
-    
 
     /**
      * Store a newly created resource in storage.
@@ -59,10 +58,8 @@ class PenjadwalanController extends Controller
             'txtkegiatan'     => 'required',
             'txtTanggalPelaksanaan'   => 'required',
             'txtRincianPelaksanaan'   => 'required',
-            'txtJumlahSasaran'   => 'required',
             'slctDesa' => 'required',
-            'slctPelaksana1' => 'required',
-            'slctPelaksana2' => 'required'
+            'slctPelaksana1' => 'required'        
         ]);
 
         //create post
@@ -147,9 +144,13 @@ class PenjadwalanController extends Controller
     public function destroy($id)
     {
         //delete
-        Jadwal::where('id', $id)->delete();
+        $jadwal = Jadwal::where('id', $id)->first();
+        if($jadwal->status == 0){
+            Jadwal::where('id', $id)->delete();
+            return redirect()->route('penjadwalan.index')->with(['success' => 'Jadwal Berhasil Dihapus!']);
+        }else{
+            return redirect()->route('penjadwalan.index')->with(['error' => 'Jadwal Gagal Dihapus!']);
 
-        //redirect to index
-        return redirect()->route('penjadwalan.index')->with(['success' => 'Jadwal Berhasil Dihapus!']);
+        }
     }
 }

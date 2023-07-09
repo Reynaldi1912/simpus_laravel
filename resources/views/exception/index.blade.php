@@ -70,7 +70,7 @@ li.chat-list-item.history-item.active {
                                     </div>
                                     <div>
                                         <span class="text-muted">{{date('d M Y',strtotime($key->created_at))}}</span><br>
-                                        <span class="font-w600 border-bottom pb-1">{{$key->nama_lengkap}}  <span class="text-muted font-size-xs">({{$key->status_appr = 1? 'Disetujui' : 'Ditolak'}})</span></span>
+                                        <span class="font-w600 border-bottom pb-1">{{$key->nama_lengkap}}  <span class="text-muted font-size-xs">({{$key->status_appr == 1? 'Disetujui' : 'Ditolak'}})</span></span>
                                         <p class="font-w600 pt-2">{{$key->kegiatan}}</p>
                                     </div>
                                 </li>
@@ -287,6 +287,7 @@ li.chat-list-item.history-item.active {
             const key = chatItem.getAttribute('data-key');
             document.getElementById("content").style.display = "block";
             document.getElementById("fullContent").style.display = "none";
+            document.getElementById("content-history").style.display = "none";
             getCurrentContents(key);
         });
     });
@@ -296,6 +297,7 @@ li.chat-list-item.history-item.active {
             const key = chatItem.getAttribute('data-key');
             document.getElementById("content-history").style.display = "block";
             document.getElementById("fullContent").style.display = "none";
+            document.getElementById("content").style.display = "none";
             getCurrentContentHistory(key);
         });
     });
@@ -307,9 +309,9 @@ li.chat-list-item.history-item.active {
                 console.log(data);
                 // document.getElementById('id_desa').value = data.id_desa;
                 // document.getElementById('username').value = data.username;
-                document.getElementById('status_appr').textContent = data.status_appr = 1 ? "DISETUJUI" : "DITOLAK" ;
+                document.getElementById('status_appr').textContent = data.status_appr == 1 ? "DISETUJUI" : "DITOLAK" ;
                 document.getElementById('old_date').textContent =  moment(data.old_date).format('DD-MM-YYYY');
-                document.getElementById('new_date').textContent =  moment(data.new_date).format('DD-MM-YYYY');
+                document.getElementById('new_date').textContent =  data.new_date != null ? moment(data.new_date).format('DD-MM-YYYY') : '-';
                 document.getElementById('kegiatan').textContent = data.kegiatan;
                 // document.getElementById('alasan').textContent = data.alasan;
                 document.getElementById('desa_history').textContent = data.nama_desa;

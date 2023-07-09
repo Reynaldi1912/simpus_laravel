@@ -43,7 +43,7 @@
                                 <select class="form-control mb-3" name="slctPelaksana1" id="slctPelaksana1" required>
                                 </select>
                                 <label for="" class="mt-5">Pelaksana 2</label>
-                                <select class="form-control mb-3" name="slctPelaksana2" id="slctPelaksana2" required>
+                                <select class="form-control mb-3" name="slctPelaksana2" id="slctPelaksana2">
                                 </select>
                                 <button type="submit" class="btn btn-success btn-block">Tambahkan Jadwal</button>
                             </form>
@@ -230,8 +230,8 @@
             let option2 = document.getElementById("slctPelaksana2");
             option1.innerHTML = '';
             option2.innerHTML = '';
-            if (option1 !== null && option2 !== null) { // tambahkan kondisi ini untuk mengecek keberadaan elemen HTML
-                option1.innerHTML = ''; // tambahkan baris ini untuk menghapus opsi-opsi sebelum menambahkan yang baru
+            if (option1 !== null && option2 !== null) { 
+                option1.innerHTML = ''; 
                 fetch('{{route('getUserByIdDesa','')}}'+'/'+id)
                     .then(res => res.json())
                     .then((out) => {
@@ -244,6 +244,8 @@
                                 option2.innerHTML += "<option value='"+data.nama_lengkap+"'>"+data.nama_lengkap+"</option>";
                             }
                         }
+                        option1.selectedIndex = 0;
+                        option2.selectedIndex = 0;
                     })
                     .catch(err => console.error(err));
             }
@@ -255,8 +257,8 @@
 
             option1.innerHTML = '';
             option2.innerHTML = '';
-            if (option1 !== null && option2 !== null) { // tambahkan kondisi ini untuk mengecek keberadaan elemen HTML
-                option1.innerHTML = ''; // tambahkan baris ini untuk menghapus opsi-opsi sebelum menambahkan yang baru
+            if (option1 !== null && option2 !== null) { 
+                option1.innerHTML = '';
                 fetch('{{route('getUserByNamaDesa','')}}'+'/'+nama_desa)
                     .then(res => res.json())
                     .then((out) => {

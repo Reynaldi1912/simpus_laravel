@@ -55,10 +55,6 @@ class ExceptionController extends Controller
         if($status == 0){
             //approve
             if($penjadwalan->status != 1){
-                $penjadwalan->update([
-                    'tanggal_mulai' => $request->tanggal
-                ]);
-
                 $exception = Exception::all()->where('id',$request->id_exception)->first();
                 $exception->delete();
 
@@ -69,6 +65,10 @@ class ExceptionController extends Controller
                    'old_date' => $penjadwalan->tanggal_mulai,
                    'new_date' => $request->tanggal,
                    'kegiatan' => $penjadwalan->kegiatan
+                ]);
+
+                $penjadwalan->update([
+                    'tanggal_mulai' => $request->tanggal
                 ]);
                 return back()->with('warning','Berhasil , Exception Berhasil Di Approve');
             }

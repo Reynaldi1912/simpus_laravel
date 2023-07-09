@@ -43,7 +43,7 @@
                             <td class="text-center">{{$key->tekanan_darah}}</td>
                             <td class="d-none d-sm-table-cell text-center">{{$key->diagnosa}}</td>
                             <td class="d-none d-sm-table-cell text-center">{{$key->penyuluhan}}</td>
-                            <td class="d-none d-sm-table-cell text-center">{{$key->created_at}}</td>
+                            <td class="d-none d-sm-table-cell text-center">{{date('Y-m-d', strtotime($key->created_at))}}</td>
                             <td class="text-center">
                                 <button type="button" class="btn btn-sm btn-secondary get-detail" data-toggle="modal" data-target="#modal-current-data" data-key="{{$key->id}}">
                                     <i class="fa fa-eye"></i>
@@ -61,7 +61,7 @@
 
 <!-- Extra Large Modal -->
 <div class="modal" id="modal-current-data" tabindex="-1" role="dialog" aria-labelledby="modal-current-data" aria-hidden="true">
-    <div class="modal-dialog modal-md" role="document">
+    <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="block block-themed block-transparent mb-0">
                 <div class="block-header bg-primary-dark">
@@ -74,71 +74,100 @@
                     </div>
                 </div>
                 <div class="block-content">
-                <span class="text-muted">Nama Petugas : <span id="nama_petugas"></span></span>
-                <br><br>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td class="text-black">NIK</td>
-                                <td id="nik"></td>
-                            </tr>
-                            <tr>
-                                <td class="text-black">Nama Lengkap</td>
-                                <td id="nama"></td>
-                            </tr>
-                            <tr>
-                                <td class="text-black">Tanggal Lahir</td>
-                                <td id="tanggal_lahir"></td>
-                            </tr>
-                            <tr>
-                                <td class="text-black">Jumlah Anggota Keluarga</td>
-                                <td id="jumlah_kk"></td>
-                            </tr>
-                            <tr>
-                                <td class="text-black">Alamat</td>
-                                <td id="alamat"></td>
-                            </tr>
-                            <tr>
-                                <td class="text-black">Umur</td>
-                                <td id="umur"></td>
-                            </tr>
-                            <tr>
-                                <td class="text-black">Nomor HP</td>
-                                <td id="no_hp"></td>
-                            </tr>
-                            <tr>
-                                <td class="text-black">BPJS</td>
-                                <td id="bpjs"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <br>
+                <!-- BATAS -->
+                    <div class="row m-5">
+                        <div class="col row">
+                            <div class="col-3">
+                                <h6>Nama Petugas :</h6>
+                            </div>
+                            <div class="col">
+                                <ol>
+                                    <li><h6 id="nama_petugas"></h6></li>
+                                    <li><h6 id="nama_petugas2"></h6></li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="col row">
+                            <div class="col">
+                                <h6>Upaya Kesehatan : <span id="upaya_kesehatan"></span></h6>
+                                <h6>Kegiatan : <span id="kegiatan"></span></h6>
+                            </div>
+                        </div>
+                    </div>
                     <hr>
-                    <h3 class="block-title mt-5 text-muted pb-5">Detail Hasil Kunjungan Pasien</h3>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td class="text-black">Berat Badan</td>
-                                <td id="berat_badan"></td>
-                            </tr>
-                            <tr>
-                                <td class="text-black">Tinggi Badan</td>
-                                <td id="tinggi_badan"></td>
-                            </tr>
-                            <tr>
-                                <td class="text-black">Tekanan Darah</td>
-                                <td id="tekanan_darah"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <span class="text-black">Diagnosa : </span><br>
-                    <span id="diagnosa"></span>
-                    <br>
-                    <span class="text-black">Penyuluhan : </span><br>
-                    <span id="penyuluhan"></span>
-                    <br>
-                    <span class="text-black">Dokumentasi : </span><br>
-                    <span id="dokumentasi"></span><br><br>
+                    <div class="row m-5">
+                        <div class="col">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-black">NIK</td>
+                                        <td id="nik"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-black">Nama Lengkap</td>
+                                        <td id="nama"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-black">Tanggal Lahir</td>
+                                        <td id="tanggal_lahir"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-black">Jumlah Anggota Keluarga</td>
+                                        <td id="jumlah_kk"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-black">Alamat</td>
+                                        <td id="alamat"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-black">Umur</td>
+                                        <td id="umur"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-black">Nomor HP</td>
+                                        <td id="no_hp"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-black">BPJS</td>
+                                        <td id="bpjs"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-black">Berat Badan</td>
+                                        <td id="berat_badan"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-black">Tinggi Badan</td>
+                                        <td id="tinggi_badan"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-black">Tekanan Darah</td>
+                                        <td id="tekanan_darah"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br>
+                            <span class="text-black">Diagnosa : </span><br>
+                            <span id="diagnosa"></span>
+                            <br><br>
+                            <span class="text-black">Penyuluhan : </span><br>
+                            <span id="penyuluhan"></span>
+                            <br>
+                        </div>
+                    </div>
+                    <hr>
+                    <h4 class="pl-5">Dokumentasi : </h4>
+                    <div class="text-center">
+                        <span id="dokumentasi"></span><br><br>
+                    </div>
+
+                <!-- BATAS -->
+                
                 </div>
             </div>
             <div class="modal-footer">
@@ -178,8 +207,11 @@
                     document.getElementById('tekanan_darah').textContent = " : "+data.tekanan_darah;
                     document.getElementById('diagnosa').textContent = data.diagnosa;
                     document.getElementById('penyuluhan').textContent = data.penyuluhan;
+                    document.getElementById('upaya_kesehatan').textContent = data.upaya_kesehatan;
+                    document.getElementById('kegiatan').textContent = data.kegiatan;
                     document.getElementById('dokumentasi').innerHTML = "<img src='/images/" + data.dokumentasi + "' alt='' width='300px'>";
-                    document.getElementById('nama_petugas').textContent = data.nama_petugas;
+                    document.getElementById('nama_petugas').textContent = data.nama_pelaksana1 == null ? '-' : data.nama_pelaksana1;
+                    document.getElementById('nama_petugas2').textContent = data.nama_pelaksana2 == null ? '-' : data.nama_pelaksana2 ;
                     document.getElementById('print').innerHTML = "<a href='/kunjungan/"+data.id+"' class='btn btn-success'>Print Hasil Kunjungan</a>";
                 })
     }

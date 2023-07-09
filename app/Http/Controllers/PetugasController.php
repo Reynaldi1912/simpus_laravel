@@ -113,7 +113,8 @@ class PetugasController extends Controller
             'id'     => $request->txtUsername,
             'email'   => $request->txtEmail,
             'nama_lengkap'   => $request->txtNamaLengkap,
-            'id_desa'   => $request->slctDesa
+            'id_desa'   => $request->slctDesa,
+            'password' => Hash::make($request->txtUsername)
         ]);
         return redirect()->route('petugas.index')->with(['success' => 'Data Berhasil Dirubah!']);
     }

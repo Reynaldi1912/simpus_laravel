@@ -44,9 +44,6 @@
                                 {{$key->nama_desa}}
                             </td>
                             <td class="text-center">
-                                <button type="button" class="btn btn-sm btn-secondary" data-toggle="tooltip" title="View Customer">
-                                    <i class="fa fa-user"></i>
-                                </button>
                                 <a href="{{route('petugas.edit' , $key->id)}}" type="button" class="btn btn-sm btn-warning" data-toggle="tooltip" title="View Customer">
                                     <i class="fa fa-pencil"></i>
                                 </a>

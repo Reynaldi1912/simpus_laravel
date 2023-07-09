@@ -25,7 +25,7 @@ class JadwalMobileController extends Controller
      */
     public function create()
     {
-        //
+        echo json_encode(DB::table('vw_timenow')->first());
     }
 
     /**

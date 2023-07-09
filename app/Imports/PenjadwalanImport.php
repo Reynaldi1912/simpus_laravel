@@ -25,7 +25,6 @@ class PenjadwalanImport implements ToModel, WithHeadingRow, SkipsEmptyRows, With
 
     public function model(array $row)
     {
-
         $desa = Desa::where('nama_desa', $row['desa'])->first();
         $id_desa = null;
 

@@ -61,4 +61,8 @@ class JsonController extends Controller
     public function getDetailHasilKunjungan($id){
         echo json_encode(DB::table('vw_detail_hasil_kunjungan')->where('id',$id)->first());
     }
+    public function getAllDesa(){
+        echo json_encode(DB::table('vw_total_kunjungan_this_month')->get());
+    }
+    
 }

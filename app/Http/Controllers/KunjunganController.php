@@ -49,11 +49,37 @@ class KunjunganController extends Controller
     public function show($id)
     {
         $data = DB::table('vw_detail_hasil_kunjungan')->where('id',$id)->first();
-        $pdf = PDF::loadview('kunjungan.index_pdf',['data'=>$data]);
+        setlocale(LC_ALL, 'id_ID'); // Mengatur pengaturan lokal ke bahasa Indonesia
+        $dateString = $data->created_at;
+        $date = date("d", strtotime($dateString));
+        $month = date("n", strtotime($dateString));
+        $year = date("Y", strtotime($dateString));
+        
+        // Daftar bulan dalam bahasa Indonesia
+        $bulan = array(
+            1 => 'Januari',
+            2 => 'Februari',
+            3 => 'Maret',
+            4 => 'April',
+            5 => 'Mei',
+            6 => 'Juni',
+            7 => 'Juli',
+            8 => 'Agustus',
+            9 => 'September',
+            10 => 'Oktober',
+            11 => 'November',
+            12 => 'Desember'
+        );
+        
+        $monthName = $bulan[$month];
+        
+        $formattedDate = $date . ' ' . $monthName . ' ' . $year;
+        return view('kunjungan.index_pdf',['data'=>$data , 'tanggal_mulai'=>$formattedDate]);
+        $pdf = PDF::loadview('kunjungan.index_pdf',['data'=>$data , 'tanggal_mulai'=>$formattedDate]);
         $pdf->set_paper("a4", "portrait");
         $pdf->render();
         return $pdf->stream('hasil-kunjungan.pdf', ['Attachment' => false]);
-        // return view('kunjungan.index_pdf');
+        return view('kunjungan.index_pdf');
     }
 
     /**

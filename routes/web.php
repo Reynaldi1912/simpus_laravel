@@ -46,3 +46,4 @@ Route::get('get-detail-history-exception/{id}', [JsonController::class, 'getDeta
 Route::get('get-detail-pasien/{id}', [JsonController::class, 'getDetailPasien'])->name('getDetailPasien');
 Route::get('get-detail-hasil-kunjungan/{id}', [JsonController::class, 'getDetailHasilKunjungan'])->name('getDetailHasilKunjungan');
 
+Route::get('get-all-desa', [JsonController::class, 'getAllDesa'])->name('getAllDesa');

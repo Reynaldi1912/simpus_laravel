@@ -75,7 +75,7 @@ class KunjunganMobileController extends Controller
             ],
             [
                 'nik' => $request->nik ,
-                'berat_badan' => number_format($request->berat_badan, 1, '.', ''),
+                'berat_badan' => $request->berat_badan,
                 'tinggi_badan' => $request->tinggi_badan,
                 'tekanan_darah' => $request->tekanan_darah,
                 'penyuluhan' => $request->penyuluhan,

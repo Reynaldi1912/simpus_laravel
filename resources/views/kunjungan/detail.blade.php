@@ -8,7 +8,7 @@
             <div class="p-3 block-header-default">
                 <div class="row">
                     <div class="col-6">
-                        <h3 class="block-title">Hasil Kunjungan</h3>
+                        <h3 class="block-title">Detail Hasil Kunjungan {{$data->first() == null ? '' : $data->first()->nama_desa}}</h3>
                     </div>
                     <!-- <div class="col-6 text-right">
                         <a href="{{route('petugas.create')}}" class="btn btn-success">Tambahkan Petugas</a>
@@ -22,26 +22,34 @@
                     <thead>
                         <tr>
                             <th class="text-center">No</th>
-                            <th class="text-center">Nama Desa</th>
-                            <th class="text-center">Nama Petugas 1</th>
-                            <th class="text-center">Nama Petugas 2</th>
-                            <th class="text-center">Action</th>
+                            <th class="text-center">nik</th>
+                            <th class="text-center">nama pasien</th>
+                            <th class="text-center">tekanan darah</th>
+                            <th class="text-center" style="width: 15%;">diagnosa</th>
+                            <th class="text-center" style="width: 20%;">penyuluhan</th>
+                            <th class="text-center" style="width: 15%;">tanggal input</th>
+                            <th class="text-center">aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                            <?php
-                                $i = 1;
-                            ?>
-                        @foreach($result as $key)
-                            <tr>
-                                <td>{{($i++)}}</td>
-                                <td>{{$key->nama_desa}}</td>
-                                <td>{{$key->petugas_1 == null ? '-' : $key->petugas_1}}</td>
-                                <td>{{$key->petugas_2 == null ? '-' : $key->petugas_2}}</td>
-                                <td class="text-center">
-                                    <a href="{{route('kunjungan.detail',$key->id)}}" class="btn btn-success">Buka Kunjungan</a>
-                                </td>
-                            </tr>
+                        <?php
+                            $i = 1;
+                        ?>
+                    @foreach($data as $key)
+                        <tr>
+                            <td class="text-center">{{$i++}}</td>
+                            <td class="font-w600 text-center">{{$key->nik}}</td>
+                            <td class="font-w600 text-center">{{$key->nama}}</td>
+                            <td class="text-center">{{$key->tekanan_darah}}</td>
+                            <td class="d-none d-sm-table-cell text-center">{{$key->diagnosa}}</td>
+                            <td class="d-none d-sm-table-cell text-center">{{$key->penyuluhan}}</td>
+                            <td class="d-none d-sm-table-cell text-center">{{date('Y-m-d', strtotime($key->created_at))}}</td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-sm btn-secondary get-detail" data-toggle="modal" data-target="#modal-current-data" data-key="{{$key->id}}">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                            </td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>

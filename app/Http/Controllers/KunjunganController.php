@@ -15,8 +15,19 @@ class KunjunganController extends Controller
      */
     public function index()
     {
-        $data = DB::table('vw_detail_hasil_kunjungan')->get();
-        return view('kunjungan.index',['data'=>$data]);
+        $results = DB::table('desa')
+                    ->select('desa.id','desa.nama_desa', DB::raw('MAX(users.nama_lengkap) AS petugas_1'), DB::raw('MIN(users.nama_lengkap) AS petugas_2'))
+                    ->leftJoin('users', 'desa.id', '=', 'users.id_desa')
+                    ->groupBy('desa.id')
+                    ->get();
+
+        return view('kunjungan.index',['result'=>$results]);
+    }
+
+    public function detail($id){
+        $data = DB::table('vw_detail_hasil_kunjungan')->where('id_desa',$id)->get();
+
+        return view('kunjungan.detail',['data'=>$data ]);
     }
 
     /**
@@ -90,7 +101,7 @@ class KunjunganController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**

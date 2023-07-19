@@ -73,6 +73,9 @@
                                 <a href="{{route('penjadwalan.index')}}"><i class="si si-calendar"></i><span class="sidebar-mini-hide">Penjadwalan</span></a>
                             </li>
                             <li>
+                                <a href="{{route('dana.index')}}"><i class="si si-credit-card"></i><span class="sidebar-mini-hide">Dana Kunjungan</span></a>
+                            </li>
+                            <li>
                                 <a href="{{route('exception.index')}}"><i class="si si-envelope-letter"></i><span class="sidebar-mini-hide">Exception</span></a>
                             </li>
                             

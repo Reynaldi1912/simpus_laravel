@@ -9,6 +9,7 @@ use App\Http\Controllers\JsonController;
 use App\Http\Controllers\ExceptionController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\KunjunganController;
+use App\Http\Controllers\DanaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,9 @@ Route::resource('desa', DesaController::class);
 Route::resource('exception', ExceptionController::class);
 Route::resource('pasien', PasienController::class);
 Route::resource('kunjungan', KunjunganController::class);
+Route::resource('dana', DanaController::class);
+
+Route::get('detail-kunjungan/{id}',[ KunjunganController::class , 'detail'])->name('kunjungan.detail');
 
 Route::resource('penjadwalan', PenjadwalanController::class);
 

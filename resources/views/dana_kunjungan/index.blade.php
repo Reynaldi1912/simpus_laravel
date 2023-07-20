@@ -56,28 +56,41 @@
 </div>
 
 <script>
-    document.getElementById('dana_kunjungan').addEventListener('input', function() {
-    var danaKunjungan = this.value;
-    var totalDanaKunjunganCells = document.getElementsByClassName('total-dana-kunjungan');
+    $(document).ready(function () {
+        var table = $('#datatable').DataTable({
+            pageLength: 15, // Ubah nilai ini sesuai kebutuhan Anda (lebih dari 13)
+            lengthMenu: [[15, 25, 30, -1], [15, 25, 30, 'Semua']]
+        });
 
-    Array.from(totalDanaKunjunganCells).forEach(function(cell) {
-        var kunjunganText = cell.parentNode.querySelector('.kunjungan').getAttribute('data-value');
-        var kunjungan = parseInt(kunjunganText);
+        document.getElementById('dana_kunjungan').addEventListener('input', function () {
+            var danaKunjungan = parseFloat(this.value.replace(/[^\d.-]/g, ""));
+            var totalDanaKunjunganCells = document.getElementsByClassName('total-dana-kunjungan');
 
-        console.log(kunjungan);
-        if (!isNaN(kunjungan)) {
-            var totalDanaKunjungan = kunjungan * danaKunjungan;
-            var formattedDanaKunjungan = totalDanaKunjungan.toLocaleString('id-ID', {
-                style: 'currency',
-                currency: 'IDR'
+            Array.from(totalDanaKunjunganCells).forEach(function (cell) {
+                var kunjunganText = cell.parentElement.querySelector('.kunjungan').getAttribute('data-value');
+                var kunjungan = parseInt(kunjunganText);
+
+                console.log(kunjungan);
+                if (!isNaN(kunjungan)) {
+                    var totalDanaKunjungan = kunjungan * danaKunjungan;
+                    var formattedDanaKunjungan = formatRupiah(totalDanaKunjungan);
+                    cell.textContent = formattedDanaKunjungan;
+                } else {
+                    cell.textContent = "-";
+                }
             });
-            cell.textContent = formattedDanaKunjungan;
-        } else {
-            cell.textContent = "-";
+        });
+
+        // Function untuk mengubah angka menjadi format Rupiah
+        function formatRupiah(angka) {
+            var formatter = new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 2
+            });
+            return formatter.format(angka);
         }
     });
-});
-
 </script>
 
 @endsection

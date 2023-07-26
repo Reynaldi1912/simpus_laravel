@@ -44,7 +44,7 @@
                                     <td>{{$key->total_kunjungan - $key->kunjungan}} Kunjungan</td>
                                     <td>{{$key->total_kunjungan}} Kunjungan</td>
                                     <td class="total-dana-kunjungan">Rp 0,00</td>
-                                    <td><a href="{{ route('kunjungan.kuitansi', ['id' => $key->nomor_urut, 'total' => 0]) }}" class="btn btn-success btn-print" data-id="{{ $key->nomor_urut }}">Print</a></td>
+                                    <td><a href="{{ route('kunjungan.kuitansi', ['id' => $key->nomor_urut, 'total' => 0]) }}"  target="_blank" class="btn btn-success btn-print" data-id="{{ $key->nomor_urut }}">Print</a></td>
                                 </tr>
                             @endforeach
                         </tbody>

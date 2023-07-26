@@ -34,6 +34,8 @@ Route::resource('pasien', PasienController::class);
 Route::resource('kunjungan', KunjunganController::class);
 Route::resource('dana', DanaController::class);
 
+Route::get('print-kuitansi/{id}/{total}',[ DanaController::class , 'print'])->name('kunjungan.kuitansi');
+
 Route::get('detail-kunjungan/{id}',[ KunjunganController::class , 'detail'])->name('kunjungan.detail');
 
 Route::resource('penjadwalan', PenjadwalanController::class);

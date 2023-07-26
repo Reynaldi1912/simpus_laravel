@@ -15,7 +15,7 @@ class DanaController extends Controller
      */
     public function index()
     {
-        $data = DB::table('vw_kunjungan_petugas')->get();
+        $data = DB::table('vw_total_kunjungan_petugas')->get();
         return view('dana_kunjungan.index' , ['data'=>$data]);
     }
 
@@ -26,7 +26,14 @@ class DanaController extends Controller
      */
     public function create()
     {
-        //
+    }
+    public function print($id , $total){
+        $data = DB::table('vw_total_kunjungan_petugas')->where('nomor_urut',$id)->first();
+        $user = DB::table('users')->where('nama_lengkap', $data->nama_pelaksana)->first();
+        if($user){
+            return view('dana_kunjungan.index_pdf' , ['data'=>$data , 'nominal'=>$total , 'user'=>$user]);
+        }
+        return back()->with('error','Maaf Petugas '.$data->nama_pelaksana . ' Belum Terdaftar Dalam Sistem');
     }
 
     /**
